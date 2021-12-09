@@ -1,0 +1,14 @@
+https://www.raspberrypi.com/documentation/computers/os.html
+pictures serial
+
+
+/boot/cmdline
+-> serial hidden kicked
+but... no bootloader messages
+
+
+
+* Topics
+File System
+RAM
+Boot

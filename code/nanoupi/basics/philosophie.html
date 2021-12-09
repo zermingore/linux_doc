@@ -1,0 +1,56 @@
+Philosophie Unix (le truc sur lequel sont basés, entre autres Linux et Mac OS)
+- Des commandes simples que tu peux combiner pour faire des trucs kikoo
+Dit comme ça ça t'aide surement pas à t'y retrouver mais des exemples peuvent aider:
+
+
+
+Cela dit, pas toutes les commandes sont triviales:
+`find` pour trouver un fichier par exemple a un paquet d'options, une en particulière permettant d'executer quelque-chose pour chaque fichier
+
+ex: chercher 'lol' dans tous les fichier du dossier courrant s'appelant nanou_quelquechose
+$> find . -iname nanou_\* -exec grep -H lol {} \;
+et ouais, ça suit pas trop le schema cmd1 | cmd2 | cmd3 | ...
+
+
+
+`bash` Le truc qui tourne dans le terminal dans lequel tu tapes tes commandes et qui les interprete :/
+$> lol
+bash: lol: command not found
+^^^^ <- oui lui la
+
+Note:
+Il y a une multitude d'interpretteurs de commande (on parle de "shell").
+Les shells sérieux sont basés sur `sh` qui traine depuis les annés 70.
+Ca permet d'avoir des programmes relativement compatibles qu'importe le shell que tu / ton system choisit.
+
+
+
+- TOUT est fichier
+
+un fichier est un fichier (sans déconner...)
+un dossier est un fichier (woot?)
+ton clavier est un fichier
+ta RAM est un fichier
+ton CPU est un fichier
+un programme en train de s'éxecuter est un fichier
+
+ok c'est bien mais c'est utile pour les développeurs du kernel, pas pour les utilisateurs comme nous de savoir ça ou bien?
+
+en fait non, c'est utile.
+écrire dans un fichier `echo blabla >> mon_fichier`
+afficher un fichier: `cat mon_fichier`
+
+
+donc, exemple concret, sur mon laptop:
+(attention, ça dépend du Hardwar; ici le controlleur en charge de ça est un intel d'où le intel_backlight)
+
+# Récupperer la valeur max du rétro-éclairage de l'écran
+cat /sys/class/backlight/intel_backlight/max_brightness
+852
+
+# ok, on va le foutre à environ un quart
+echo 200 > /sys/class/backlight/intel_backlight/brightness
+
+
+et c'est *vraiment* comme ça que je règle le rétro-éclairage sur mon laptop
+(concrètement, j'ai mappé des touches clavier pour lire la valeur courante et l'augmenter par pallier, mais ça marche *vraiment* comme ça)

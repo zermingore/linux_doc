@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Guide de survie Linux</title>
+  </head>
+
+  <body>
+    <h1>Introduction</h1>
+
+    <h2>Ouvrir un terminal</h2>
+    En se battant avec l'interface graphique il y a toujours un moyen d'ouvrir un terminal.
+
+    <h2>Se balader</h2>
+    <strong>cd ls mkdir</strong> cd
+
+
+    <h2>Éditer un fichier</h2>
+    Sous Windows, notepad est un cas typique de merde qui survit depuis des décenies sans que personnes ne sache pourquoi.<br/>
+    Sous Linux, un éditeur de texte que tu peux utiliser dans un terminal.
+
+    Mais pourquoi se prendre la tête dans un terminal quand on peut juste ouvrir une fenêtre?<br/>
+    Parcequ'on ne peut pas toujours. Si tu hack directement sur ta Raspberry avec écran et clavier, c'est cool ça marche. Mais peut-être que t'as qu'un écran / clavier / souris que t'as pas envie de debrancher / rebrancher tout ça en permanence ou peut-être que ta Raspberry loin de toi alors que t'es vautrée dans ton canapé. Dans ce genre de situation, rediriger un flux vidéo est possible mais a un prix et si le but c'est de modifier 2 lignes dans un fichier, c'est peut-être juste over-kill.
+
+    Dans le monde Unix/Linux il y a 2 éditeurs main-stream.
+
+
+
+    vim. vim est basé sur vi qui est, sans déconner, installé juste partout (assez certainement par exemple sur ton téléphone, ta box internet). Dès que t'as un petit système sur lequel t'as besoin de faire quelque chose plus ou moins directement, vi pèse vraiment pas lourd donc c'est un peu le choix par défaut.<br/>
+    vim (Vi IMproved; vi amélioré) est basé sur vi. Si tu gère vi, le jour où tu te retrouve sur un système vraiment limité avec juste vi, tu t'en sortira.
+
+    Philosophie: 2 modes:
+    1 mode édition, pour taper du texte (c'est révolutionaire);
+    1 mode commande, pour entrer des commandes (genre "copier" "coller" "remplacer") .
+
+    Avec des exemples:
+    si t'appuie sur 'w' puis entrée en mode texte, tout va bien: t'insère un 'w' et un saut de ligne dans ton fichier. En mode commande, tu sauvegarde (Write).
+    si t'appuie deux fois sur 'd' en mode texte, tout va bien: t'ajoute "dd". En mode commande, tu coupe la ligne sur laquelle est ton curseur.
+
+
+
+    Emacs
+
+    L'avantage d'Emacs comparé à vim: pas de mode commande: tu tapes du texte, de magnifiques caractères apparaissent à l'écran...<br/>
+    par contre tu passes ton temps à appuyer sur Control (sauvegarder: Control-x puis Control-s).
+
+
+
+    Les deux viennent avec des tutoriels intégrés (en anglais par contre).
+    Emacs: Control-h t (Control-h puis appuyer sur 't')
+    Vim: plutôt que d'ouvrir vim, ouvrir vimtutor
+
+    Je t'invites à éssayer les deux et à choisir le bon.
+
+    Aussi bien vim qu'emacs sont configurables mais vraiment hard-core
+
+    Note: dans ton terminal, le mode d'édition par défaut est basé sur Emacs mais est switchable sur vim
+
+
+
+    <h1>Commandes les plus importantes</h1>
+    <p>
+      Dans un terminal<br/>
+
+Les commandes les plus importantes selon moi sont, dans l'ordre:
+`man` Le manuel. Permet de consulter la documentation d'une commande. La doc est souvent bien faite quasiment toujours à jour.
+
+
+`history` Pas un programme à proprement parler mais permet d'afficher la liste des commandes que tu as entrées (+ ou - récemment; sur la clé USB et sur la Pi je l'ai config pour qu'il retienne pour toujours; persiste après extinction du PC / de la Pi)
+
+
+`apropos` Trouver des programmes installés qui correspondent à un mot clé donné
+
+`apropos kernel` vomit mais dans la liste:
+uname (2)            - get name and information about current kernel
+
+$> uname
+Linux
+^^^^^ <- Cool on s'en serait pas douté...
+
+... oui mais tu connais `man` donc
+$> man uname
+...
+       -a, --all
+              print all information, in the following order, except omit -p and -i if unknown:
+...
+
+# Exemple sur mon laptop
+$> uname -a
+Linux viking 5.10.0-9-amd64 #1 SMP Debian 5.10.70-1 (2021-09-30) x86_64 GNU/Linux
+5.10.70-1: version exacte du Kernel Linux
+x86_64: architecture (Intel / AMD 64 bits dans ce cas)
+
+
+
+Tricks les plus importants
+
+Perso j'attends de *tous* les programmes qu'ils acceptent --help (ou au moins -h) comme argument.
+Dans la pluspart des cas ça te donne une liste des arguments que le programme accepte.
+
+
+'tab' La *touche* tabulation (peut-être un truc avec 2 flêches en sens opposés, tout à gauche de ton clavier).
+C'est *de loin* la touche que j'utilise le plus en dehors des lettres. C'est l'autocompletion, le truc qui complète ce que t'as commencé à écrire.
+
+Completion d'un nom programme: si 2 fois <tab> renvoie rien (2 fois car si il y a plusieurs possibilités par défaut rien n'est affiché)
+
+
+Certains programmes gèrent aussi l'auto-completion. Par example
+
+$> ma<tab> # rien
+$> ma<tab><tab> une liste de commandes qui commencent par 'ma'
+
+$> man <tab><tab>
+Display all 8928 possibilities? (y or n)
+# Bon ~9000 sur mon système c'est beaucoup donc non (n) mais c'est la liste des pages de manuel; *pas* la liste des commandes
+
+$> man apr<tab>
+$> man apropos
+
+      </p>
+
+
+
+### TODO xrandr / arandr
+
+
+  </body>
+</html>

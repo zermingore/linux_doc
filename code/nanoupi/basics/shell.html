@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Basics</title>
+  </head>
+
+  <body>
+
+    <h1>Terminal Vs Shell</h1>
+    Le terminal est la fenêtre graphiqe dans laquelle tu tapes du texte.<br/>
+    Le shell est le programme qui interprête le texte que t'as tapé au moment où tu t'appuie sur entrée.
+
+    En gros: on s'en fout du Terminal, celui qui fait le boulot c'est le shell (qui est le programme qui tourne dans le terminal).
+
+    ### TODO shell (bash sh zsh...)
+
+
+
+    <h1>Commandes Shell</h1>
+    Quand j'écris "commande" un peu partout c'est un abus de language.<br/>
+
+    mis à part <emph>cd</emph> 99% des commandes que t'entre sont des programmes, des binaires que le shell va juste éxecuter pour toi. Pas plus.
+
+    Exemple:
+    $> ls
+
+    Ton shell va, en gros chercher à exécuter /usr/local/bin/ls -> pas trouvé puis /usr/bin/ls -> hey ça existe -> exécuté. Ce programme en gros demande à ton OS "hey gros, il y a quoi dans ce(s) répertoire(s)" puis affiche ce que l'OS lui a donné si il s'est pas fait envoyer chier.
+
+    ### Plus de détails sur comment est exécuté un programme (hard-core)
+    ### TODO advanced/binary_loader.html
+
+
+    ### TODO CSS DETAILS
+    Mais alors cd?
+    <emph>cd</emph> est une built-in.<br/>
+    Tu peux lister les built-ins avec la commande <emph>help</emph>
+    Pas un programme qui trainerait dans, par exemple /usr/bin/cd<br/>
+    Ton shell va en gros juste set une variable dont la valeur est l'argument que t'as filé à <emph>cd</emph><br/>
+    $> man bash
+    ...
+    PWD    The current working directory as set by the cd command.
+    ...
+    <emph>ls</emph> sans argument va être interprêté par le shell comme "ls $PWD" et donc ton shell va exécuter le programme `ls` avec $PWD comme argument
+
+
+  </body>
+</html>

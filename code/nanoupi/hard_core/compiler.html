@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Compilateur</title>
+  </head>
+
+  <body>
+    <h1>Introduction</h1>
+
+    Le rôle d'un compilateur, c'est de prendre du code et de génerer un binaire que ton CPU peut comprendre.
+
+    Un compilateur d'un language de programmation relativement moderne est un programme conmplexe (genre vraiment complexe, je classe ça top 3: Kernel, Navigateur Web, Compilateur).<br/>
+
+    Bonne nouvelle: Pour comprendre en gros comment ça marche, pas besoin de sauter par la fenêtre.<br/>
+    Mauvaise nouvelle: Si tu veux comprendre à 100% comment ça marche, là par contre, c'est possible mais <emph>vraiment</emph> hard-core. J'aimerai bien prender le temps de piger mais ça c'est largement aussi au-dessus de mes moyens pour l'instant.<br/>
+
+
+
+    <h1>Composants d'un compilateur</h1>
+
+    Ici je prend l'exemple d'un compilateur pour language main stream, compilé pas hard-core (genre C)
+
+    <h2>Front End</h2>
+    <h3>Pré-Processeur</h3>
+    Le compilateur va faire quasi litéralement du search-and-replace sur ton code.
+    "#include &lt;stdio.h&gt;" -> ok j'ai trouvé /usr/include/stdio.h je copie-colle son contenu là où t'as ta directive "#include"<br/>
+
+
+    Si t'as des macros genre genre "#ifdef __WINDOWS__ .... #endif" le pré-processeur est en mode "ok, tu m'as pas demandé de compiler pour Windows du coup ça ça dégage"<br/>
+
+    Si t'as des macros genre genre "#ma_constante_moche 42" le pré-processeur remplace toutes les occurences de ma_constante_moche par 42, sans réflechir, c'est pas son boulot <br/>
+
+
+    Fun fact: tu peux demander au compilateur de s'arrêter après la phase de pré-processing.<br/>
+    $> gcc -E test.c
+
+
+
+    <h3>Compilation</h3>
+    Pour compliquer le game, compilateur est un abus de language, ici c'est vraiment du compilateur (qui est en charge uniquement de la phase de compilation) dont on parle.<br/>
+
+
+
+
+
+    <h2>Back End</h2>
+    Jusqu'ici, le compilateur se fout de savoir pour quel CPU il compile mais dans le back-end c'est là que ça commence à jouer un rôle.<br/>
+
+    À partir d'ici, on commence à ouvrir les portes de l'enfer.
+
+    <h3>Assembleur</h3>
+    Optimization
+    <h3>Linker</h3>
+
+  </body>
+</html>
