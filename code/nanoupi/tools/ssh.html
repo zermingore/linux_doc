@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SSH</title>
+  </head>
+
+  <body>
+    <h1>Introduction</h1>
+
+    <p>
+      Modifier un fichier de configuration, le copier sur clé USB; aller sur ta Pi, monter ta clé USB, copier ton fichier au bon endroit<br/>
+      Avoir une nouvelle version d'un programme, le copier sur une carte SD, se bouger jusqu'à Pi<br/>
+      Redémarrer la Pi pour tester un truc<br/>
+      ... Ouais c'est juste chiant et t'as moyen de te gourrer à force de repéter ce genre de trucs<br/>
+
+      Vu que les programmeurs sont des loques (ma prof d'algo disait "feignants mais efficaces") depuis les années 80 on a moyen d'automatiser ce genre de trucs chiants typiques<br/>
+
+      Secure SHell (SSH) est utile pour ce genre de choses
+
+    </p>
+
+    <h2>Se connecter à distance</h2>
+    <p>
+      Pour se faire 2 pré-requis:
+      <ul>
+        <li>Un serveur SSH où</li>
+      </ul>
+    </p>
+
+
+    <h3>Prendre le controle d'une machine à distance</h3>
+    ssh
+    ssh -X
+
+    <h3>Tranferer des fichier entre 2 machines</h3>
+
+
+    <h1>Advanced</h1>
+    <h2>Se connecter sans mot de passe</h2>
+    Alors non, on ne supprime pas le mot de passe du compte sur lequel on veut se connecter (même si c'est techniquement viable).<br/>
+
+    On va plutôt demander au serveur de se souvenir de nous en lui filant notre clé (privée, celle qu'il vaut mieux éviter de filer à tout le monde).<br/>
+
+
+    <h2>Éxecuter une commande spécifique sur un serveur</h2>
+  </body>
+</html>
