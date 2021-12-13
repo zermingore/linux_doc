@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <title>RAM</title>
+  </head>
+
+  <body>
+    <h1>Introduction</h1>
+    La Random Access Memory (mémoire vive); mémoire à acces aléatoire si on traduit ça mot-à-mot et justement, on va voir pourquoi aléatoire<br/>
+
+    Quand tu lance un programme sur ta machine, c'est la fête, ton programme voit *toute* la mémoire.<br/>
+    Oui mais en fait non: même si il a l'impression d'avoir accèss à *toute* ta RAM en fait, c'est juste un trick de ton OS.<br/>
+
+    Si un programme demande à l'OS de la mémoire vive (malloc par exemple), l'OS va (si tout se passe bien), refiler une adresse.
+    Pour l'exemple on va dire que le programme ressemble à ça en pseudo-C.<br/>
+
+
+    ...
+    mon_addresse = malloc(123);
+    ...
+
+    et admettons que mon_addresse vaut après 0xabcd
+    (c'est de l'hexadecimal car
+    les adresses étant des grands nombres
+    les CPU bossant avec des octets
+    dans cet exemple précis, pour éviter encore plus d'embrouilles, on va dire valeur décimale (normale) -> quantité; valeur hex -> adresse.
+
+    en gros, ce programme demande à l'OS "hey, tu pourrai me filer 123 octets [bytes]?" Et l'OS répond en mode "Ouais, tu peux regarder à l'adresse 0xaaaa, c'est à toi".
+
+
+    Admettons que maintenant, ton programme fasse un 2e malloc (memory allocation).
+    ...
+    ma_seconde_addresse = malloc(456);
+    ...
+
+    ma_seconde_addresse va pouvoir valoir quelque-chose comme 0xbbbb.
+
+
+    En réalité, l'OS va probablement strictement ne rien faire pour ce 2e appel à malloc(), avec ces paramètres (123 et 456) car en fait quand ton CPU doit allouer de la mémoire, ça peut partir en gros bordel, c'est lent et plus l'OS doit gérer de portions de mémoire et potentiellement, plus il est lent.
+
+    Du coup, le premier malloc() a *très* probablement une page mémoire entière alloué à ton programme (4096 octets sur mon system, checkable avec `getconf -a`) et pour le 2e malloc, l'OS était très probablement en mode 4096 > 123 + 456 donc je me fous de ce que tu fais dans ta page mémoire, lache moi.
+
+
+
+    <h2>La pagination</h2>
+    Attention c'est la partie hard-core<br/>
+
+    TODO translation, page-miss, ...
+
+
+  </body>
+</html>

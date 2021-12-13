@@ -26,7 +26,7 @@
     "#include &lt;stdio.h&gt;" -> ok j'ai trouvé /usr/include/stdio.h je copie-colle son contenu là où t'as ta directive "#include"<br/>
 
 
-    Si t'as des macros genre genre "#ifdef __WINDOWS__ .... #endif" le pré-processeur est en mode "ok, tu m'as pas demandé de compiler pour Windows du coup ça ça dégage"<br/>
+    Si t'as des macros genre genre "#ifdef __WINDOWS__ .... #endif" et que t'es sous Linux, le pré-processeur est en mode "ok, tu m'as pas demandé de compiler pour Windows du coup ça ça dégage"<br/>
 
     Si t'as des macros genre genre "#ma_constante_moche 42" le pré-processeur remplace toutes les occurences de ma_constante_moche par 42, sans réflechir, c'est pas son boulot <br/>
 
