@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exemple concret</title>
+  </head>
+
+  <body>
+    <h1>Faire clignoter une LED</h1>
+
+    <h2>Mais où est la <strike>chèvre</strike> LED?</h2>
+
+    <h3>Hardware</h3>
+    Ok, on va s'intéresser à la grande double rangée de pins (broches? en français) sur la Raspberry.<br/>
+    Ce sont les General Purpose Input / Output (GPIOs); En français ça pourrai donner les entrée / sorties pour usage générique?<br/>
+    En gros ces pins sont des moyens de communiquer (dans les 2 sens) avec le matériel de la Raspberry. Tu peux les utiliser, par exemple pour:
+    <ul>
+      <li>Brancher un détecteur d'humidité / luminosité et sur la Pi lire la valeur de l'humidité / la luminosité pour te l'envoyer par mail tous les mois;</li>
+      <li>Brancher un afficheur 7 ségments (du genre à pouvoir seulement afficher un chiffre) et depuis la Pi lui envoyer le chiffre à afficher;</li>
+      <li>Brancher un bouton et depuis la Pi faire un truc spécial quand t'appuie dessus (activer le WiFi par exemple);</li>
+    </ul>
+
+    Attention, certaines de ces pins ont un role spécifique et ne peuvent pas être reconfigurées (la pin qui crache du 5 Volts; la masse par exemple).<br/>
+    Ça veut dire que tu ne peut pas brancher n'importe quoi n'importe où. Le site de la Raspberry fourni l'image suivante
+    (disponible <a href=https://www.raspberrypi.com/documentation/computers/os.html#gpio-and-the-40-pin-header>ici</a>)<br/>
+
+    Pour éviter de foutre le bordel, on va laisser tranquille les pins qui ont une fonction pré-définie (écrite entre paranthèses, par exemple RX / TX sont pour l'interface de débug; SDA / SCL / SCLK sont pour le <a href="TODO">bus i2c</a>).<br/>
+
+    Du coup on va choisir (par exemple) le GPIOs 17 (pin numéro 11). C'est la 6e pin en partant de la gauche, rangée du "bas".<br/>
+
+    <div id="note">Note: Même si ce genre de hardware devrait permettre de faire pas mal de merde, on va éviter de tout cramer et on va gentillement éteindre la Raspberry avant de brancher quoi que soit.<br/></div>
+
+    Ok, cool on sait où la branche négative ("-" la branche plus courte que l'autre) de la LED va venir. Il manque plus qu'un peu de jus pour la faire fonctionner. On va choisir 3.3 Volts pour ça (on a le choix entre 3,3V et 5V; pour une LED pas besoin de beaucoup).<br/>
+
+    Pour pas se retrouver avec des fils dans tous les sens / se battre à tortiller des pates d'une LED autours d'une pin ou ce genre de truc foireux qu'on a tous tenté avant de rager; je conseille <em>fortement</em> l'utilisation d'une <a href="TODO breadboard.html"> bread-board (board de prototypage)</a> pour ça.<br/>
+
+    En règle générale, c'est une bonne idée de connecter une résistance en série avec la LED. Pas besoin de trop réflechir, dans les eaux des 220 Ohm c'est ok.<br/>
+
+    Le montage devrai ressembler à ça (éteindre le hardware avant de brancher quelque chose est une bonne idée en général).<br/>
+
+    <!-- TODO picture -->
+
+
+
+    <h3>Software</h3>
+    Ok, tout est bien branché, on peut allumer la Pi, et là... il ne se passe rien.<br/>
+    On va demander au système d'activer le GPIO.<br>
+    <div id="note">Note: par soucis de formatting, les lignes qui commencent par $> devraient être éxecutées en tant que user normal; les lignes qui commencent par #> doivent être executées en tant que super user (root) -> executer <code>su</code> puis entrer la commande une fois loggé ou, en tant que user executer <code>sudo</code> commande (exemple <code>sudo ls /root/</code>)</div><br/>
+    <code>$> cat /sys/class/gpios/</code> (juste pour checker si le GPIO existe)
+    <code>#> echo 1 > /sys/class/gpios/</code> (la LED devrai s'allumer)
+
+
+    Debug<br/>
+    Permission denied -> <code>sudo sh -c 'echo 1 > /sys/class/gpio/'</code><br/>
+    <a href="TODO_subshel.html">pourquoi <code>sudo sh -c ...<code></a>
+
+
+    La LED reste éteinte.<br/>
+  </body>
+</html>

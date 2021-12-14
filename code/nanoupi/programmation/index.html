@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Programmation</title>
+  </head>
+
+  <body>
+    <h1>Contenu</h1>
+
+    C Unix C++
+
+
+    <h2>Système d'exploitation</h2>
+
+    Le système d'exploitation (Operating System -> OS) permet d'utiliser les resources d'une machine.<br/>
+    Concrètement, si t'as un CPU, une barrette de RAM un lecteur de carte SD un clavier, une souris, un ventillateur, un thermomètre et un quartz qui vibre à une certaine fréquence, le système d'exploitation va permettre, par exemple:<br/>
+    <ul>
+      <li>De lire les entrées du clavier et de la souris (par l'intermédiaire d'interruptions)</li>
+      <li>De vérifier régulièrement (polling) la température du thermomètre et d'ajuster la vitesse du ventilateur en fonction</li>
+      <li>D'ouvrir des fichiers qui se trouvent sur la carte SD</li>
+    </ul>
+
+
+
+    <h2>Interactions avec le hardware</h2>
+    En C ou on peut avoir le controle du hardware (le prix à payer, c'est qu'il y a moyen de se faire mal).<br/>
+    Pour indication, Linux est codé en C.<br/>
+
+    Le désavantage du C: certains concepts ne sont pas trivials mais souvent nécessaires. De plus, se foirer est assez facile et seulement si t'as de la chance, ton programme crashe (en fait, son comportement est imprévisible et si t'as de la chance, il fait suffisament n'imp pour que l'OS le tue).<br/>
+
+    Les bonnes nouvelles:
+    <ul>
+      <li>Pour pas mal de choses, on peut programmer en utilisant le système d'exploitation directement et pas se battre avec des détails d'implémentation.<li/>
+      <li>C'est facile d'accéder au hardware. Allumer une LED c'est une ligne de shell</li>
+      <li>Le manuel pour programmer en C et en shell est <em>VRAIMENT</em> bien foutu. Coder sans connection Internet pour constament copier-coller quelque-chose est vraiment faisable et assez souvent plus rapide et plus sûr (par contre, c'est intimidant quand t'as pas l'habitude).<li/>
+    </ul>
+
+
+    Pour le fun-fact, en cherchant un exemple sur mon laptop, j'ai découvert que j'avais une LED sur mon capslock (que j'utilise comme backspace, sûrement pour ça que je l'ai jamais spotée):
+    <code>echo 1 > /sys/class/leds/input0\:\:capslock/brightness</code>
+    Et, oui, ça marche, elle est verte :)
+
+
+
+  </body>
+</html>
+)

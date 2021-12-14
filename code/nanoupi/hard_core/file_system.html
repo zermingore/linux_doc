@@ -17,5 +17,26 @@
     - Éviter de toujours écrire au même endroit physiquement (sur une carte SD par exemple; "wear leveling")
 
 
+    <h2>Pourquoi c'est (fortement) recommandé de proprement dé-monter (éjecter sous Windows) une clé USB / carte SD avant de la retirer physiquement?</h2>
+
+    Quand tu écris dans un fichier, le File Système n'écrit pas forcément tout de suite dans ton fichier, physiquement sur ton média.<br/>
+    Souvent c'est parceque écrire sur un média est <em>vraiment</em> long, comparativement à par exemple, écrire en RAM. Du coup un des boulot du File Système c'est de garder sous la main les fichier récement ouverts, en RAM et, si t'en a besoin, il est déjà chargé en RAM.<br/>
+
+    Pour éssayer de se rendre compte de la différence de Timing entre registres CPU RAM et Disque Dur, tu peux en gros considérer un facteur 100 entre chaque couche.<br/>
+    <ul>
+      <li>1 Cycle CPU: 1 nano-seconde (milliardième de seconde)</li>
+      <li>1 Accès RAM: 100 nano-secondes</li>
+      <li>1 Accès Disque: 10 micro-secondes</li>
+    </ul>
+
+    Si on se dit qu'aujourd'hui un aller-retour Paris - Tokyo dure 1 jour; il y a un siècle ça aurait duré 3 mois; à pied à l'ancienne en se posant, le voyage d'une vie: 27 ans.<br/>
+
+
+    Donc si ton CPU peut éviter d'attendre des plombes (concrètement faire dormir ton programme) le temps que la ressource (fichier) soit disponible, c'est plutôt pas mal.<br/>
+
+    C'est pourquoi quand le file système à déjà chargé un fichier et que tu le ferme, en fait le file système te dit ouais t'inquiète il est fermé, mais reste en fait en RAM (statistiquement, t'as de grande chances de ré-ouvrir un fichier déjà ouvert [et éventuellement fermé] plus tôt).<br/>
+
+    C'est aussi une des raisons pour lesquelles éteindre son PC proprement est une bonne idée.
+
   </body>
 </html>
