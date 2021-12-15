@@ -54,9 +54,14 @@
 
     Debug<br/>
     Permission denied -> <code>sudo sh -c 'echo 1 > /sys/class/gpio/'</code><br/>
-    <a href="TODO_subshel.html">pourquoi <code>sudo sh -c ...<code></a>
+    Pourquoi <code>sudo sh -c ...<code><br/>
+    Pour faire vite: force tout le bloc à être éxecuté d'un coup<br/>
+    <a href="TODO_subshell.html">En détails</a>
 
 
     La LED reste éteinte.<br/>
+    Vérifier la polarité de la LED: branche courte = moins; branche longue = plus.<br/>
+    Éventuellement, la LED brille vraiment faiblement.<br/>
+    Masse (-) <=> branche courte de la LED <=> branche longue de la LED <=> résistance 220 ohms <=> 3,3 Volts doit fonctionne
   </body>
 </html>
