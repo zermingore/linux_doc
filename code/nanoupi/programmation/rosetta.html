@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Pierre de rosette</title>
+  </head>
+
+  <body>
+    <h1>Introduction</h1>
+    Ici, on va écrire le même exemple dans plusieurs languages de programmation différents.<br/>
+
+    Choisir le language dépend idéalement uniquement de ce qu'on veut faire.<br/>
+    Bien sûr, on a tous des préférences personnelles; ça ne devrait pas être la première raison pour choisir un language.<br/>
+    Utiliser plusieurs languages dans un seul projet est possible.<br/>
+
+
+    <h2>Exemples</h2>
+
+    <h3>Hello World</h3>
+    Ce programme affiche juste quelque-chose à l'écran; pas plus.
+
+    <h4>C</h4>
+    <pre>
+      #include <stdio.h> // STandarD Input/Output pour pouvoir utiliser, par exemple printf()
+
+      int main()
+      {
+        printf("Hello world!\n"); // '\n' saut de ligne explicite
+
+        return 0; // on retourne quelque-chose explicitement parcequ'on est pas des porcs
+      }
+    </pre>
+
+
+    <h4>Shell</h4>
+    <pre>
+      #!/bin/sh
+
+      echo "Hello world!"
+    </pre>
+
+
+    <h4>Python</h4>
+    <pre>
+      print("Hello world!")
+    </pre>
+
+
+    <h4>C++</h4>
+    <pre>
+      #include <iostream> // Input / Output stream (flux); nécessaire pour utiliser cout
+
+      int main() // on *doit* définir une fonction main()
+      {
+        std::cout << "Hello world!\n"; // '\n' saut de ligne explicite
+
+        return 0; // on retourne quelque-chose explicitement parcequ'on est pas des porcs
+      }
+    </pre>
+
+  </body>
+</html>

@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Programmation</title>
+  </head>
+
+  <body>
+    <h1>Introduction</h1>
+    Ici on ne s'intéresse <em>pas</em> à un language de programmation en particulier.<br/>
+
+    Tous les languages de programmation accessibles utilisent des structures communes.<br/>
+
+    <ul>
+      <li>Les commentaires: ils sont là <em>uniquement</em> pour les humains mais éssentiels pour comprendre quelque-chose.</li>
+      <li>On utilise souvent des tests (si on arrive pas à pinger google, on allume une LED rouge).</li>
+      <li>Pour ne pas se répetter constament, on a des boucles (toutes les 10 minutes, relever l'humidité ambiante).</li>
+      <li>Des fonctions pour éviter de se perdre, débugger plus facilement (ex: appeler allumerWifi() et osef de ce que fait exactement cette fonction).</li>
+      <li>Des variables (ex: temperature_moyenne = temperatures_accumulees / nombre_temperatures)</li>
+    </ul>
+    et... c'est tout pour les bases<br/>
+
+
+
+
+    <h1>Features</h1>
+
+    <h2>Commentaires</h2>
+    C'est <em>vraiment</em> compliqué de bien commenter du code.<br/>
+    Une règle génerale c'est d'essayer de rendre le code lisible par lui-même.<br/>
+
+
+    Exemple de commentaires inutiles:
+    <code>a = a + 1; // incrémente a</code>
+    <pre>#include <stdio.h> // inclus stdio.h</pre>
+
+    Exemple assez tricky:<br/>
+    <code>getStatus(); // Get the WiFi status </code>
+    Dans ce cas, ça serait beaucoup plus clair de renommer la fonction et supprimer le commentaire:<br/>
+    <code>getWifiStatus();</code>
+
+
+    Exemple un peu trop commun de la vraie vie:<br/>
+    <pre>if (humidity_percent > 80) // Above 60%</pre>
+
+    Pour éviter de se gourrer (oublier de modifier le commentaire; éviter de lire le commentaire mais pas le code), il vaudrait mieux:
+    <pre>if (humidity_percent > 80) // Above high threshold</pre>
+
+    ou, encore mieux (pour avoir tout au même endroit, lisible directement et modifiable sans avoir à scroller partout pour voir si '80' est utilisé quelque-part ailleurs):<br/>
+    <pre>
+      const int low_threshold  = 30;
+      const int mid_threshold  = 50;
+      const int high_threshold = 80;
+
+      /*
+       ...
+       */
+      if (humidity_percent > high_threshold)
+      /*
+       ...
+       */
+    </pre>
+
+
+    Même si c'est redondant et si honnêtement je recommenderai de supprimer les commentaires de ce genre,
+    c'est bien sûr OK d'avoir des commentaires qui décrivent le comportement d'une fonction standard.<br/>
+    <pre>
+      int fd; // file descriptor
+
+      /* Ouvrir le fichier en lecture et écriture */
+      fd = open("settings", O_RDWR);
+      if (errno != 0)
+      {
+        // Affiche automatiquement un message d'erreur précédé du message passé en argument
+        perror("Opening settings file");
+      }
+    </pre>
+
+
+
+    <h2>Variables</h2>
+    Le but d'une variable, c'est de stocker quelque-chose.<br/>
+
+    En languages C ou Python par exemple, une variable peut avoir différent types.<br/>
+    En gros, il y a 3 types main-stream: valeur numérique; chaine de charactères (string); structure (type custom).<br/>
+
+    <div id="note">Note: En C on peut déclarer des constantes (variables non modifiables) avec le mot-clé "const".
+      C'est une bonne idée de l'utiliser autant que possible (pour éviter de se gourrer, par exemple en ajoutant 0.5 à Pi).</div>
+
+
+    <div id="note">Note: En Python, les variables n'ont pas de type explicite. Python déduit le type d'une variable automatiquement</id>
+
+
+
+
+
+    <h3>Valeur numérique</h3>
+    Exemple: Un entier naturel ("integer" en englais -> "int" en C); Un nombre à virgule flottante ("float" en C).<br/>
+
+    <h4>C</h4>
+    <pre>
+      int i = 2;
+      int angle = -180;
+      float f = 8.2;
+      const float days_per_year = 365.2425;
+    </pre>
+
+    <h4>Python</h4>
+    <pre>
+      i = 2;
+      angle = -180;
+      f = 8.2;
+    </pre>
+
+
+    <h3>Chaine de charactères (string)</h3>
+
+    Une chaine de charactères est du texte. Elle peut contenir des sauts de ligne, charactères spéciaux, ...
+
+    <code>const char* string = "my string";</code>
+
+    <div id="note">
+      Note: En shell, par défaut, il n'y a pas vraiment de type; tout est chaine de charactères; ce qui est assez piegeux:<br/>
+    </div>
+    <pre>
+      #!/bin/sh
+
+      a=1
+      a=a+1
+      echo $a
+      # affiche a+1
+
+      b=1
+      b=$(expr $b + 1)
+      echo $b
+      # affiche 2
+    </pre>
+    On reviendra là-dessus <a href="shell.html">ici</a> dans la partie spécifique programmation shell.
+
+
+
+    <h2>Tests</h2>
+    Un test sert à exécuter du code sous certaines conditions.<br/>
+
+    Pseudo-code
+    <code>SI la LED est allumée, ALORS on l'éteint</code>
+    <code>SI l'humidité est suppérieure à 80% ALORS on envoie un mail</code>
+    <code>SI on est le matin ALORS on écrit l'heure avec "am" SINON on l'écrit avec "pm"</code>
+
+    En anglais: "si" = "if"; "alors" = "then" (pas nécéssaire dans tous les languages); "sinon" = "else"<br/>
+
+
+    Shell
+    <pre>
+      fichier_config=my_config
+      if [ $(ls $fichier_config) ]
+      then
+        echo "Config file exists"
+      else
+        echo "Using default config (no config file found)"
+      fi
+    </pre>
+
+
+    C
+    <pre>
+
+    </pre>
+
+    <h2>Fonctions</h2>
+
+
+    <h1>Structures</h1>
+
+
+
+
+    <h2>Boucles</h2>
+    Une boucle sert à repeter certaines intructions.<br/>
+
+    Exemple en pseudo-code:
+    <code>pour chaque valeur d'humidité enregistrée, trouver le maximum</code>
+    <code>pour toujours: faire clignoter une LED qui indique que la Pi fonctionne encore</code>
+
+    <pre>
+      // C
+      int main(int argc, char* argv[])
+      {
+        for (int i = 0; i < argc; i++)
+        {
+          printf("Argument[%i]: [%s]\n", i, argv[i]); // %i nombre remplacé par i; %s string, remplacée par argv[i]
+        }
+
+        return 0;
+      }
+    </pre>
+
+
+    <pre>
+      # Shell
+      list_files=$(ls)
+      for f in list_files
+      do
+        echo "Found file: $f"
+      done
+    </pre>
+
+
+    <pre>
+      #!/bin/sh
+
+      # Exemple pour faire clignoter une LED
+
+      # Demande au système de mettre à disposition une pin précise utilisée en sortie (output)
+      echo 17 > /sys/class/gpio/export
+      echo out > /sys/class/gpio/gpio17/direction
+
+      led_status=0 # 0: off; 1: on
+      while true # pour toujours
+      do
+        # Inversion du statut de la LED (0 -> 1 ; 1 -> 0)
+        if [ $led_status == 0 ]
+        then
+          led_status=1 # on
+        else
+          led_status=0 # off
+        fi
+
+        echo $led_status > /sys/class/gpio/gpio17/value
+
+        sleep 1
+      done
+    </pre>
+
+
+
+
+
+
+  </body>
+</html>
