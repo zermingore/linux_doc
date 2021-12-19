@@ -63,5 +63,26 @@
     Vérifier la polarité de la LED: branche courte = moins; branche longue = plus.<br/>
     Éventuellement, la LED brille vraiment faiblement.<br/>
     Masse (-) <=> branche courte de la LED <=> branche longue de la LED <=> résistance 220 ohms <=> 3,3 Volts doit fonctionne
+
+
+
+    <h3>Configurer le gpio</h3>
+    <code>ls -l /sys/class/gpio/</code>
+
+
+    <code>echo 17 > /sys/class/gpio/export</code>
+
+    <code>ls -l /sys/class/gpio/</code>
+
+    <code>echo 1 > /sys/class/gpio/gpio17/value</code>
+    echo: write error: Operation not permitted
+
+    <code>cat /sys/class/gpio/gpio17/direction</code>
+    in
+
+    <code>echo out > /sys/class/gpio/gpio17/direction</code>
+
+
+    <code>echo 1 > /sys/class/gpio/gpio17/value</code>
   </body>
 </html>
