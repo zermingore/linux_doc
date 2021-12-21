@@ -66,7 +66,7 @@
     Côté client, on ne peut rien faire de particulièrement dangereux (éviter quand même de donner un nom d'utilisateur à un serveur qu'on ne connait pas).<br/>
     Côté serveur, SSH, comme n'importe quel serveur, expose une partie du système et est donc à risque. Je conseillerai fortement de ne pas laisser tourner de serveur (ssh) ou autre accéssibles depuis l'éxterieur. Parfois certaines FAI proposent un service SSH permettant de se connecter sur sa box de manière sécure, sans se prendre la tête, et de là se connecter avec ssh à son serveur qui tourne à la maison est parfaitement possible (par contre probablement sans X-serveur forwarding)<br/>
     Par défaut, le compte root (administrateur) n'a pas le droit de se connecter. Pour un serveur qui tourne uniquement à la maison, sans aucun accès à l'exterieur (internet), c'est OK de l'autoriser (même si, pour éviter tout problème de "oh lol, je copie-colle ça vite fait", je préfère ne pas documenter ici comment on fait vu que le bénéfice par rapport à se logger en tant que user normal et utiliser <code>sudo</code> ou même <code>su</code>)<br/>
-    Quelque-chose d'intéressant par contre: Le client et le serveur se configure dans respectivement les fichiers <code>/etc/ssh/ssh_config</code> et <code>/etc/ssh/sshd_config</code> (noter le 'D' de sshd_config pour le serveur, le démon [daemon = service sous Windows])<br/>
+    Quelque-chose d'intéressant par contre: Le client et le serveur se configure dans respectivement les fichiers <code>/etc/ssh/ssh_config</code> et <code>/etc/ssh/sshd_config</code> (noter le 'D' de sshd_config pour le serveur, le Démon [Daemon = service sous Windows])<br/>
     NOTE: Changer le port par défaut n'offre aucune protéction contre quelconque attaque de l'extérieur.<br/>
 
 
@@ -95,7 +95,8 @@
     <h2>Éxecuter une commande spécifique sur un serveur</h2>
     Si on veut utiliser <code>ssh</code> pour exécuter une seule commande et se déconnecter, il est possible de le faire d'un coup:<br/>
     <code>ssh user@ip commande</code><br/>
-    Exemple: <code>ssh user@192.168.1.123 ls /etc/</code>
+    Exemple: <code>ssh user@192.168.1.123 uname -a</code><br/>
+    # Affiche les informations du système (serveur).
 
 
   </body>
