@@ -16,32 +16,87 @@
       Vu que les programmeurs sont des loques (ma prof d'algo disait "feignants mais efficaces") depuis les années 80 on a moyen d'automatiser ce genre de trucs chiants typiques<br/>
 
       Secure SHell (SSH) est utile pour ce genre de choses
-
     </p>
+
 
     <h2>Se connecter à distance</h2>
     <p>
       Pour se faire 2 pré-requis:
       <ul>
-        <li>Un serveur SSH où</li>
+        <li>Un serveur SSH où on veut se connecter (et où on a un compte pour avoir droit de le faire)</li>
+        <li>Un client SSH d'où on se connecte</li>
       </ul>
     </p>
 
 
     <h3>Prendre le controle d'une machine à distance</h3>
-    ssh
-    ssh -X
+    <code>ssh utilisateur@ip</code> (Remplacer utilisateur par le nom de compte qu'on veut utiliser sur le server)<br/>
+    Exemple <code>ssh user@192.168.1.123</code>
+
+    Note: Si on omet le login, le même login qu'on utilise côté client (<code>whoami</code>) sera utilisé<br/>
+    Exemple:
+    #> whoami
+    root
+    #> ssh 192.168.1.1
+    équivalent à ssh root@192.168.1.1
+
+
+    Si on veut utiliser des programmes graphiques (genre ouvrir un pdf directement sur le serveur) sur le server, le flag <code>-X</code> ('x' majuscule) est nécessaire.<br/>
+    ssh -X user@ip
+
 
     <h3>Tranferer des fichier entre 2 machines</h3>
+    Se connecter pour tester des trucs, modifier des fichiers est cool mais parfois, le confort de son host (par exemple PC de bureau / laptop) permet, par exemple, d'ouvrir un gros projet sans problème, peut permetter de compiler beaucoup plus vite pour sa board que si on le faisait directement dessus (TODO cross-compilation link).<br/>
+    Dans ce cas, on aimerai bien faire tout le boulot sur un laptop par exemple et copier le binaire et l'éxecuter sur sa board.<br/>
+    On pourrait aussi vouloir récupérer un gros fichier de log pour l'analyser plus tard au calme sur une machine qui ne pète pas un cable si on le log fait plus de 100MB.<br/>
+    Toujours dans le monde SSH, il y a SCP (Open SSH Secure file CoPy). La syntaxe de base est la suivante:<br/>
+
+    Direction client -> serveur<br/>
+    <code>scp chemin_mon_fichier_a_uploader user@ip:/chemin/ou/on/veut/copier</code><br/>
+    Exemple: scp config user@192.168.1.123:/etc/<br/>
+
+    Direction serveur -> client
+    <code>user@ip:/chemin/mon_fichier_a_dowloader chemin_ou_on_veut_copier_le_fichier_downloadé</code><br/>
+    Exemple: scp user@192.168.1.123:/etc/ssh/sshd_config ~/conf_serveur_ssh_board<br/>
+
+
+
+
+    <h1>Sécurité</h1>
+    Côté client, on ne peut rien faire de particulièrement dangereux (éviter quand même de donner un nom d'utilisateur à un serveur qu'on ne connait pas).<br/>
+    Côté serveur, SSH, comme n'importe quel serveur, expose une partie du système et est donc à risque. Je conseillerai fortement de ne pas laisser tourner de serveur (ssh) ou autre accéssibles depuis l'éxterieur. Parfois certaines FAI proposent un service SSH permettant de se connecter sur sa box de manière sécure, sans se prendre la tête, et de là se connecter avec ssh à son serveur qui tourne à la maison est parfaitement possible (par contre probablement sans X-serveur forwarding)<br/>
+    Par défaut, le compte root (administrateur) n'a pas le droit de se connecter. Pour un serveur qui tourne uniquement à la maison, sans aucun accès à l'exterieur (internet), c'est OK de l'autoriser (même si, pour éviter tout problème de "oh lol, je copie-colle ça vite fait", je préfère ne pas documenter ici comment on fait vu que le bénéfice par rapport à se logger en tant que user normal et utiliser <code>sudo</code> ou même <code>su</code>)<br/>
+    Quelque-chose d'intéressant par contre: Le client et le serveur se configure dans respectivement les fichiers <code>/etc/ssh/ssh_config</code> et <code>/etc/ssh/sshd_config</code> (noter le 'D' de sshd_config pour le serveur, le démon [daemon = service sous Windows])<br/>
+    NOTE: Changer le port par défaut n'offre aucune protéction contre quelconque attaque de l'extérieur.<br/>
+
+
 
 
     <h1>Advanced</h1>
+    <h2>SSH sous Windows</h2>
+    <div class="windows">
+      J'ai été <emph>vraiment</emph> surpis de voir que Microsoft s'est enfin bougé le cul pour supporter nativement SSH, un protocol main-stream depuis plus de 20 ans sous Linux)<br/>
+      Bon, c'est pas la fête, <code>ssh -X</code> pour activer le X-serveur (serveur graphique) ne fonctionne pas directement mais apparament en se battant avec le Sous Système Linux pour Windows, il y a moyen que ça marche.<br/>
+      À croire qu'un jour si Windows devient Open-Source, on aura un Système d'exploitation Microsoft qui sert à quelque-chose.</br>
+      Un serveur ssh qui tourne sous Windows devrait être possible mais j'en sais rien, j'ai pas essayé.
+    </div>
+
+
     <h2>Se connecter sans mot de passe</h2>
     Alors non, on ne supprime pas le mot de passe du compte sur lequel on veut se connecter (même si c'est techniquement viable).<br/>
 
-    On va plutôt demander au serveur de se souvenir de nous en lui filant notre clé (privée, celle qu'il vaut mieux éviter de filer à tout le monde).<br/>
+    On va plutôt demander au serveur de se souvenir de nous en lui filant notre clé (publique).<br/>
+
+    Le moyen le plus simple, plutôt que de faire un <code>scp</code> à la main de sa clé, ce qui marche très bien, il existe <code>ssh-copy-id</code>un binaire spécifique dans la suite SSH:<br/>
+    <code>ssh-copy-id user@ip</code><br/>
+    Comme d'habitude remplacer "user" et "ip" par leur vraies valeurs.
 
 
     <h2>Éxecuter une commande spécifique sur un serveur</h2>
+    Si on veut utiliser <code>ssh</code> pour exécuter une seule commande et se déconnecter, il est possible de le faire d'un coup:<br/>
+    <code>ssh user@ip commande</code><br/>
+    Exemple: <code>ssh user@192.168.1.123 ls /etc/</code>
+
+
   </body>
 </html>

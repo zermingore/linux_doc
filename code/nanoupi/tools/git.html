@@ -7,17 +7,29 @@
   <body>
     <h1>Introduction</h1>
     <p>
-      Le problème de Git, c'est aussi son point fort: il a été conçu pour tracker... le kernel Linux, par Linus Torvalds, son créateur, qui en avait surement marre de devoir appliquer des patchs en pièce jointes de mail à la pelle.<br/>
+      Git est l'un des outils les plus important pour développeur mais pas que. On s'est tous déjà retrouvés à copier-coller une version de quelque-chose (document word, binaire, bout de code, ...).<br/>
+
+      Git est un gestionaire de version. C'est son boulot de faire les équivalents de copier-coller. C'est son boulot de ne jamais rien perdre, de clairement afficher les différences entre deux versions, de t'aider à trouver la dernière version stable...<br/>
+
+      Le problème de Git, c'est aussi son point fort: il a été conçu pour tracker... le kernel Linux, par Linus Torvalds, son créateur, qui en avait surement marre de devoir appliquer des patchs en pièce jointes de mails à la pelle à la main.<br/>
 
       Les points forts:<br/>
       <ul>
-        <li>Peut fonctionner intégralement offline: t'es dans le train tu peux checker ce que t'as fait la semaine dernière, faire un commit</li> <!-- TODO commit def -->
-        <li>Distribué: par exemple certains documents que je ne veux pas perdre sont trackés dans un serveur git... sur plusieurs serveurs</li>
-        <li>Checker vite fait comment se comporte ta version stable sans copier tes changements quelque-part</li>
-        <li>Checker vite fait si t'as depuis ton dernier commit cassé quelque-chose</li>
-        <li>Même si c'est relativement fréquent de se retrouver perdu, c'est <em>vraiment</em> compliqué de perdre / casser quelque-chose</li>
+        <li>Peut fonctionner intégralement offline: t'es dans le train tu peux accéder à tout depuis la dernière fois que t'étais online</li>
+        <li>Distribué: par exemple certains documents que je ne veux pas perdre sont trackés dans un serveur git... qui peut être dupliqué de manière complètement transparente sur plusieurs machines physiques</li>
+        <li>Checker vite fait si depuis ta dernière "sauvegarde" t'as cassé quelque-chose sans copier-coller tes changements à l'arrache</li>
+        <li>On peut vérifier à quel moment à été cassé quelque-chose</li>
+        <li>Même si c'est relativement fréquent de se retrouver perdu, c'est <em>vraiment</em> compliqué de perdre quelque-chose</li>
+        <li>La documentation est complète et bien foutue (une page de <code>man</code> par commande)</li>
+        <li>Si t'as une vague idée de comment fonctionne Git, ça suffit pour survivre (et aide à comprendre comment fonctione un gestionaire de version en général)</li>
       </ul>
 
+      Les points faibles:
+      <ul>
+        <li>C'est une <em>grosse</em> machine de guerre dont un paquet de features ne te seront pas utiles</li>
+        <li>Perdre des données est compliqué mais se retrouver dans des situations pas claires peut arriver assez fréquement</li>
+        <li>Il éxiste des interfaces graphiques pour Git; Les rares fois où j'ai éssayé, ça à fini en ragequit</li>
+      </ul>
     </p>
 
 
@@ -25,9 +37,9 @@
     <code>git init .</code> (Juste une fois, pour créer le repo git lui-même)<br/>
     Éventuellement, créer des fichiers cools<br/>
     Éventuellement, demander à git d'ignorer certains fichiers (créer un .gitignore)<br/>
-    <code>git add . (Ajouter tous les fichiers dans le repo)</code><br/>
+    <code>git add .</code> Ajouter tous les fichiers non ignorés dans le repo<br/>
     <code>git commit -m "Ce message devra être le plus clair possible quand tu le lira dans 6 mois"</code><br/>
-    <code>git push</code><br/>
+    <code>git push</code> Publier les changements sur le server<br/>
 
 
 
