@@ -34,19 +34,24 @@
 
 
     <h1>TL; DR (Trop long, la flemme de lire)</h1>
-    <code>git init .</code> (Juste une fois, pour créer le repo git lui-même)<br/>
-    Éventuellement, créer des fichiers cools<br/>
-    Éventuellement, demander à git d'ignorer certains fichiers (créer un .gitignore)<br/>
-    <code>git add .</code> Ajouter tous les fichiers non ignorés dans le repo<br/>
-    <code>git commit -m "Ce message devra être le plus clair possible quand tu le lira dans 6 mois"</code><br/>
-    <code>git push</code> Publier les changements sur le server<br/>
+    <p>
+      <ol>
+        <code>git init .</code> (Juste une fois, pour créer le repo git lui-même)<br/>
+        Éventuellement, créer des fichiers cools<br/>
+        Éventuellement, demander à git d'ignorer certains fichiers (créer un .gitignore)<br/>
+        <code>git add .</code> Ajouter tous les fichiers non ignorés dans le repo<br/>
+        <code>git commit -m "Ce message devra être le plus clair possible quand tu le lira dans 6 mois"</code><br/>
+        <code>git push</code> Publier les changements sur un server<br/>
+      </ol>
 
+      <a href="TODO">Sessions git enregistrées trouvable ici.</a><br>
+    </p>
 
 
     <h1>Terminologie</h1>
     <h2>Repository</h2>
     <p>
-      Le repository (abregé repo) est le dossier dans lequel se trouve un dossier .git/<br/>
+      Le repository (abregé "repo") est le dossier dans lequel se trouve un dossier ".git"/<br/>
       Si ça peut aider, en français ça donne "dépot", même si j'ai pas encore entendu / lu ça<br/>
       C'est dans ce dossier (ou un de ses sous-dossiers) que tu vas pouvoir jouer avec <code>git</code><br/>
     </p>
@@ -54,19 +59,79 @@
 
     <h2>Commit</h2>
     <p>
-      Un commit dans la terminaison des gestionaires de version, ça ressemble à une snapshot: un copier coller de tes fichiers là tout de suite<br/>
-      Il n'y a jamais vraiment de moment parfait pour faire un commit; par expérience, il vaut mieux souvent que trop rarement.<br/>
-      Il n'y a pas de quantité minimum de changement pour faire un commit. Si tu change le timeout du réseau au démarrage de 5 minutes à 1 minute, c'est litéralement UN charactère de différence. Et si c'est le seul changement que tu fais pour le démarrage bah ok, t'as un commit avec un message qui sera du genre "Decreased network waiting time" et c'est parfait. <br/>
+      Un commit dans la terminaison des gestionaires de version, ça ressemble à une snapshot: un copier coller de tes fichiers dont git connait l'éxistence, là tout de suite<br/>
+      Il n'y a jamais vraiment de moment parfait pour faire un commit; par expérience, il vaut mieux souvent que trop rarement (vu que trop souvent c'est très rarement chiant et trop rarement est trop souvent un vrai problème).<br/>
+      Il n'y a pas de quantité minimum de changement pour faire un commit.<br/>
+      Si tu change le timeout du réseau au démarrage de 5 minutes à 1 minute, c'est litéralement UN charactère de différence. Et si c'est le seul changement que tu fais pour le démarrage bah ok, t'as un commit avec un message qui sera du genre "Decreased network waiting time" et c'est parfait. <br/>
+      Ça sera beaucoup moins chiant que "ok, je change vite fait le timeout, puis je fais autre chose qui n'a rien à voir et ne marche pas, j'abandonne mes changement et... merde pourquoi le réseau prend 3 plombes alors qu'il aurait du abandonner rapidement?"<br/>
     </p>
 
-    <h3>status</h3>
-    <p>Pour voir où on en est: quel fichier est modifié, préparé pour le prochain commit.</p>
 
-    <h3>diff</h3>
-    <p>Pour voir les différences entre le status actuel et le dernier commit.</p>
+
+    <h1>Commandes Git</h1>
+    <h2>Documentation</h2>
+    <p>
+      Git est <em>vraiment</em> un gros programme, crée par des kernel-hackers qui tombent pas toujours d'accord, pour gérer toutes les situations possibles et imaginables. Sa documentation est vraiment complète mais difficile à lire si tu sais pas ce que tu cherches; donc prend pas peur en ouvrant le <code>man</code>.<br/>
+      Toutes les commandes Git sont appelées par le programme Git et commencent donc toutes par "git": <code>git nom_commande arguments_éventuels</code> Par exemple <code>git status</code> ou <code>git add fichier/a/ajouter</code> ou encore <code>git commit -a -m "Fixed LED blink frequency"</code><br/>
+      Git a, bien sur, sa page de manuel (consultable à l'aide de <code>man git</code>). Cette page de <code>man</code> référence principalement toutes les commande Git.<br/>
+      De plus, toutes les commandes Git ont leur page de manuel dédiée, accéssible par, au choix:
+      <ul>
+        <code>man git commande</code> Exemple: <code>man git status</code>
+        <code>git commande --help</code> Exemple: <code>git add --help</code>
+        <code>git help commande</code> Exemple: <code>git commit add</code><br/>
+      </ul>
+      La touche <kbd>tab</kbd> (shell auto-complétion) est ici particulièrement utile.<br/>
+      <code>man git"tab"</code> me demande si je veux afficher 170 résultats<br/>
+      Si ce guide, ici n'est pas clair, pour les bases, les pages de manuel orientés tutoriel suivantes peuvent venir en aide: gittutorial gittutorial-2 et giteveryday (par contre le synopsis de giteveryday: <samp>Everyday Git With 20 Commands Or So</samp>. Personnelement, j'utilise quotidiennement 5 commandes; parfois 10 donc pas de panique et cette page de manuel est vraiment lisible et basée sur des exemples) . Ces pages de manuel sont consultables avec, par exemple <code>man gittutorial</code><br/>
+    </p>
+
+
+
+    <h3>git status</h3>
+    <p>
+      Pour voir où on en est: quel fichier est modifié / ignoré / supprimé / prêt pour le prochain commit...
+    </p>
+    <code>git status</code><br/>
+    Note: normalement Git utilise un code couleur: par exemple, en vert, les fichiers qui feront partie du prochain commit.<br/>
+    Les sections les plus fréquentes affichés par <code>git status</code> sont:<br/>
+    <ul>
+      <li>
+        <samp>Untracked files</samp><br/>
+        Ces fichiers sont tout simplement ignorés par Git.<br/>
+        Si ils sont modifiés ou supprimés, il ne sera pas possible d'en tirer quoi que ce soit / de les récupérer.<br/>
+        Si ces fichiers sont important, demander à git de les considérer (tracker) avec <code>git add chemin_fichier</code><br/>
+        Si ces fichiers ne devraient pas être trackés par Git, il vaut mieux les ignorer pour de bon en les ajoutant dans le fichier spécial ".gitignore". <a href="#gitignore">Voir ici pour les détails</a><br/>
+      </li>
+
+      <li>
+        <samp>Changes not staged for commit</samp><br/>
+        Ces fichiers sont trackés par Git, contiennent des modifications (visibles avec <code>git diff</code>).<br/>
+        Les fichiers trackés ne sont pas automatiquement ajoutés au prochain commit. Il faut (si souhaité) les ajoutés manuellement avec <code>git add chemin_fichier</code> pour qu'ils fassent partie du prochain commit<br/>
+    </ul>
+
+
+    <h3>git diff</h3>
+    <p>
+      Pour voir les différences entre le status actuel et le dernier commit.<br/>
+      Note: seuls les fichier explicitement trackés par Git (par l'intermédiaire de <code>git add fichier</code>) sont concernés par <code>git diff</code>
+    </p>
+
+    <h3>git add</h3>
+    <p>
+      Pour ajouter un fichier à tracker (considerer pour Git).
+    </p>
+
+
+    <h3>git commit</h3>
+    <p>
+      Pour voir les différences entre le status actuel et le dernier commit.<br/>
+      Note: seuls les fichier explicitement trackés par Git (par l'intermédiaire de <code>git add fichier</code>) sont concernés par <code>git diff</code>
+    </p>
+
 
     <h3>push</h3>
     <p>Publier / uploader les changements sur le serveur</p>
+
 
     <h3>pull</h3>
     <p>Récuperer / downloader les changements du serveur</p>
@@ -112,8 +177,25 @@
     </ol>
 
 
-    <h1>Configuration</h1>
-    .gitignore
+
+
+    <h1>Trucs et astuces</h1>
+
+
+    <h2>Configuration</h2>
+    Le truc le plus utile niveau configuration est le fichier spécial ".gitignore" (bien noter le "." dans le nom du fichier).<br/>
+    Note la documentation complète de la syntaxe utilisée dans le .gitignore est accéssible par <code>man gitignore</code> (pas de "." cette [unique] fois)<br/>
+    Ce fichier est utilisé, comme son nom l'indique, pour demander à Git d'ignorer certains fichiers.<br/>
+    Non, je ne me fous pas de la geule du monde, oui j'ai écris que tant que tu fais pas un <code>git add mon_fichier</code> mon_fichier est ignoré par Git.<br/>
+    La différence, c'est que si "mon_fichier" est référencé dans le .gitignore <code>git status</code> ne va pas prendre la peine d'afficher son nom; <code>git add mon_fichier</code> va par défault gentillement te rappeler que son nom est dans le .gitignore et ne <emph>pas</emph> l'ajouter.<br/>
+
+
+
+    <h2>--force</h2>
+    Certaines commandes Git prennent en argument optionel soit "--force" soit "--hard".<br/>
+    Il est nécéssaire de comprendre pourquoi ces arguments doivent être évités. Si tu demande à Git de faire un truc qui rique de tout casser ou que Git trouve étrange, il va t'afficher un méssage d'érreur (k'eventuellement te suggérant de lire le <code>man</code> ou de réessayer avec par exemple --force).<br/>
+    Avec --force (ou --hard suivant les commandes Git), si tu demandes à Git de te jeter par la fenêtre, il le fera (comme toutes les commande; si tu demandes à rm de virer ton fichier le plus précieux, ton système ou le binaire rm lui-même, pas de soucis, un utilisateur a demandé quelque-chose, on le respecte).<br>
+    Quoi qu'en dise n'importe qui sur un forum par exemple, même avec de bons arguments, les flags type --force et --hard doivent vraiment être compris avant d'être utilisés, et ce idéalement en lisant la page de <code>man</code> correspondante.<br/>
 
 
 
