@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">                                                                                                                                                                                            <title>Shell</title>
+  </head>
+
+  <body>
+    <h1>Introduction</h1>
+    Un Terminal (par exemple: X<emph>term</emph>, <emph>term</emph>inator) est un programme qui permet de faire tourner un invite de commande en faisant pas grand chose de plus qu'afficher du texte proprement.<br/>
+    L'invite de commande est la partie qui nous intéresse ici. <br/>
+    Le parallèle Windows serait cmd / dos
+
+
+    <div id="toc_container">
+      <p id="toc_title">Contenu</p>
+      <ul id="toc_list">
+        <li>
+          <a href="#Commandes">Commandes</a>
+        </li>
+
+        <li>
+          <a href="#editeur">Editeur</a>
+          <ul>
+            <li><a href="#emacs">Emacs</a></li>
+            <li><a href="#vim">Vim</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#ssh">SSH</a>
+        </li>
+
+        <li>
+          <a href="#git">Git</a>
+        </li>
+      </ul>
+    </div>
+
+
+    <h3>man</h3>
+    <p>
+      Peut-être la command la plus utile sous Linux.<br/>
+      Oui ça fait vieux con de dire "lis la documentation (Read The Fucking Manual -> RTFM en anglais)". Mais c'est généralement LA source la plus actuelle et celle le moins sucéptible de dire de la merde.<br/>
+      Ces page de manuels sont souvent écrites et maintenues par les dévelopeurs des programmes en question et, souvent modifiées par des gens qui trouvent que quand quelque-chose n'est pas clair modifient ou demandent aux developeurs de modifier ces pages.<br/>
+    </p>
+
+
+  En règle plus générale, <emph>quelle que soit la commande</emph>; d'où qu'elle proviennent; c'est vraiment une <emph>TRÈS</emph> bonne idée de chercher dans la doc de la commande en question pour apprendre un truc au passage. Si j'écris "et là on fait un ls -1t", cool c'est <code>ls</code> on peut rien casser. Oui mais d'après le <code>man ls</code> "-1     list one file per line." et "-t     sort by time, newest first". Voila qui peut être pratique.<br/>
+    Quand, par exemple, dans un long script tu tombe sur <code>du</code>, les premières lignes de la description suffisent très souvent. Pour <code>du</code> "Summarize disk usage...". Ok, ça parle de place sur le disque; Pas forcément besoin tout de suite de checker toutes les options possibles ou utilisés dans le script en question.
+
+
+  </body>
+</html>

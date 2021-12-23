@@ -7,10 +7,8 @@
   <body>
     <h1>Introduction</h1>
     <p>
-      Git est l'un des outils les plus important pour développeur mais pas que. On s'est tous déjà retrouvés à copier-coller une version de quelque-chose (document word, binaire, bout de code, ...).<br/>
-
+      Git est l'un des outils les plus important pour développeur mais pas que. On s'est tous déjà retrouvés à copier-coller des version de quelque-chose (document word, binaire, bout de code, ...).<br/>
       Git est un gestionaire de version. C'est son boulot de faire les équivalents de copier-coller. C'est son boulot de ne jamais rien perdre, de clairement afficher les différences entre deux versions, de t'aider à trouver la dernière version stable...<br/>
-
       Le problème de Git, c'est aussi son point fort: il a été conçu pour tracker... le kernel Linux, par Linus Torvalds, son créateur, qui en avait surement marre de devoir appliquer des patchs en pièce jointes de mails à la pelle à la main.<br/>
 
       Les points forts:<br/>
@@ -62,8 +60,8 @@
       Un commit dans la terminaison des gestionaires de version, ça ressemble à une snapshot: un copier coller de tes fichiers dont git connait l'éxistence, là tout de suite<br/>
       Il n'y a jamais vraiment de moment parfait pour faire un commit; par expérience, il vaut mieux souvent que trop rarement (vu que trop souvent c'est très rarement chiant et trop rarement est trop souvent un vrai problème).<br/>
       Il n'y a pas de quantité minimum de changement pour faire un commit.<br/>
-      Si tu change le timeout du réseau au démarrage de 5 minutes à 1 minute, c'est litéralement UN charactère de différence. Et si c'est le seul changement que tu fais pour le démarrage bah ok, t'as un commit avec un message qui sera du genre "Decreased network waiting time" et c'est parfait. <br/>
-      Ça sera beaucoup moins chiant que "ok, je change vite fait le timeout, puis je fais autre chose qui n'a rien à voir et ne marche pas, j'abandonne mes changement et... merde pourquoi le réseau prend 3 plombes alors qu'il aurait du abandonner rapidement?"<br/>
+      Si tu change le timeout du réseau au démarrage de 5 minutes à 1 minute, c'est litéralement UN charactère de différence. Et si c'est le seul changement que tu fais pour le démarrage bah ok, t'as un commit avec un message qui sera du genre "Decreased network waiting time" et c'est parfait.<br/>
+      Ça sera beaucoup moins chiant que "ok, je change vite fait le timeout, puis je fais autre chose qui n'a rien à voir et ne marche pas, j'abandonne mes changement et... merde pourquoi quand j'ai pas de réseau il faut 3 plombes pour booter alors qu'il aurait du abandonner après maximum 1 minute?"<br/>
     </p>
 
 
@@ -85,6 +83,21 @@
       Si ce guide, ici n'est pas clair, pour les bases, les pages de manuel orientés tutoriel suivantes peuvent venir en aide: gittutorial gittutorial-2 et giteveryday (par contre le synopsis de giteveryday: <samp>Everyday Git With 20 Commands Or So</samp>. Personnelement, j'utilise quotidiennement 5 commandes; parfois 10 donc pas de panique et cette page de manuel est vraiment lisible et basée sur des exemples) . Ces pages de manuel sont consultables avec, par exemple <code>man gittutorial</code><br/>
     </p>
 
+
+    <h3>git init</h3>
+    <p>
+      Sert à créer un Git repo (par conséquent: utile une unique fois par répository, à moins de vouloir qu'un repo soit physiquement à plusieurs endroits à la fois)<br/>
+      Utilisation <code>git init</code><br/>
+      Cette commande va créer un dossier .git/ où git va sauvegarder toutes ses données, pour savoir par exemple, qu'est-ce que tu as commité quand.<br/>
+    </p>
+
+
+    <h3>git clone</h3>
+    <p>
+      Sert à récupérer un repo Git (déjà existant).<br/>
+      Utilisation <code>git clone url</code> Exemple: <code>git clone https://github.com/zermingore/warevolved.git</code><br/>
+      Cette commande va créer un dossier dans lequel il y aura un .git/ (comme un <code>git init</code>) ainsi que tous les fichiers / dossiers actuels de la branche par défaut du répo cloné (le plus souvent: master ou main).
+    </p>
 
 
     <h3>git status</h3>
@@ -118,7 +131,8 @@
 
     <h3>git add</h3>
     <p>
-      Pour ajouter un fichier à tracker (considerer pour Git).
+      Pour ajouter un fichier à tracker (considerer pour Git).<br/>
+      Exemple: <code>git add mon_fichier</code> ou <code>git add mon_dossier</code><br/>
     </p>
 
 
@@ -130,11 +144,11 @@
 
 
     <h3>push</h3>
-    <p>Publier / uploader les changements sur le serveur</p>
+    <p>
+      Publier / uploader les changements sur le serveur.
+      Exemple: <code>git push</code>
+    </p>
 
-
-    <h3>pull</h3>
-    <p>Récuperer / downloader les changements du serveur</p>
 
     <h3>Log</h3>
     <p>
@@ -143,7 +157,20 @@
     </p>
 
     <h3>mv / rm</h3>
-    <p>Normalement, pour déplacer un fichier on utilise mv / rm mais pour les fichier traqués par git on va utiliser <code>git mv</code> ou <code>git rm</code></p>
+    <p>
+      Normalement, pour déplacer un fichier on utilise mv / rm mais pour les fichier traqués par git on va utiliser <code>git mv</code> ou <code>git rm</code><br/>
+      Note: on se gourre tous assez régulièrement en faisant un <code>rm</code> d'un fichier. Il faut, pour corriger le tir, <code>git checkout -- mon_fichier_que_je_veux_récupérer</code><br/>
+      Une autre erreur fréquente: <code>git rm</code> d'un fichier qu'on ne veut plus supprimer. Solution: <code>git reset -- mon_fichier_que_je_veux_récupérer</code> pour annuler la suppression en tant que telle suivie de <code>git checkout -- mon_fichier_que_je_veux_récupérer</code> pour récuppérer le fichier<br/>
+    </p>
+
+    <h3>pull</h3>
+    <p>
+      Récuperer / downloader les changements du serveur: C'est le pendant de <code>git push</code>.<br/>
+      Concrètement, c'est utile uniquement si quelqu'un d'autre que toi a pushé des changements que tu veux récupérer.<br/>
+      Même si seul sur son repo, <code>git pull</code> ne fera probablement rien ("Already up to date."), c'est une bonne habitude de puller régulièrement pour se maintenir à jour dans un répo Git.<br/>
+      En dehors de l'avantage de récuperer les derniers changements, en cas de conflits, par exemple si tu modifie un fichier qui a été modifié par quelqu'un d'autre et que Git ne sait pas comment merger vos changements, mieux vaut résoudre ce conflit le plus tôt possible.
+    </p>
+
 
 
     <h2>Éviter les problèmes</h2>
@@ -167,13 +194,13 @@
       <li>
         <code>git clone URL</code> Par exemple: <code>git clone https://github.com/torvalds/linux.git</code>
         ou
-        <code>git init .</code> Pour créer un Repository local
+        <code>git init</code> Pour créer un Repository local
       </li>
 
       <li>hack, hack, ...</li>
       <li><code>git add fichier_interessant</code> (autant de fois que nécessaire)</li>
       <li><code>git commit -m "Message qui explique *clairement* pourquoi ce commit existe"</code></li>
-      <li><code>git push</code> (éventuellement, pusher les changements sur le serveur distant)</li>
+      <li><code>git push</code> (éventuellement, pusher les changements sur le serveur)</li>
     </ol>
 
 
@@ -190,6 +217,20 @@
     La différence, c'est que si "mon_fichier" est référencé dans le .gitignore <code>git status</code> ne va pas prendre la peine d'afficher son nom; <code>git add mon_fichier</code> va par défault gentillement te rappeler que son nom est dans le .gitignore et ne <emph>pas</emph> l'ajouter.<br/>
 
 
+    <h2>stash</h2>
+    <code>git stash</code> permet d'annuler tous les changements depuis le dernier commit, mais en les sauvegardant quelque part<br/>
+    En fait <code>git</code> fait un commit mais ce commit ne vient pas tout polluer au millieu de tes commits normaux)<br/>
+    <code>git stash</code> Pour revenir au dernier commit.<br/>
+    <code>git stash pop</code> Pour restaurer ces changements.<br/>
+    <code>git stash show -p</code> permet de checker précisement le dernier truc stashé<br/>
+
+    Note: Il est possible de stasher plusieurs fois, avec des stash basées sur différent commits ou non.<br/>
+    <code>git stash list</code> Liste toutes les entrées stockées dans la stash<br/>
+    <code>git stash show -p stash@{N}</code> permet de checker précisement l'entrée numéro N stashée<br/>
+    En règle générale on peut préciser quelle entrée de la stash restaurer, voir, ... avec <code>git stash COMMANDE_STASH ARGUMENTS_COMMANDE_STASH stash@{N}</code> où N désigne le numéro des changements sauvegardé dans la stash, visible avec <code>git stash list</code><br/>
+
+    On peut vouloir récupérer les changement stashés mais en conservant une copie dans la stash: <code>git stash</code> pour sauvegarder puis <code>git stash apply</code> pour restaurer tout en conservant la sauvegarde.
+
 
     <h2>--force</h2>
     Certaines commandes Git prennent en argument optionel soit "--force" soit "--hard".<br/>
@@ -201,63 +242,75 @@
 
     <h1>Advanced</h1>
     <h2>Plus de features</h2>
-    Pas forcément super-utiles sur des petits projets mais
+    Pas forcément super-utiles sur des petits projets mais voila un pack de features avancées mais pas forcément trop hard-core.
     <ul>
       <li>Les branches c'est cool. Une façon de développer assez standard et pratique: ta branche par défaut est idéalement stable et devrait toujours fonctioner. Tu développe des nouveaux trucs sur des branches à part. Si t'es contente de ce qu'il se passe sur ces branches -> merge avec ta branche principale</li>
-      <li>Git gère les sous-repos: un repo Git dans un repo git</li>
       <li>Tu peux annoter (tager) un commit (genre "v1.2.0" correspond au commit dont le message est "Fixed LEDs animation")</li>
-      <li>Tant que tu ne fous pas la merde dans le dossier .git/ (bien sur, si tu supprime des fichiers non traqués par git, c'est fini pour eux) tu n'arrivera probablement pas à casser ton repository. Tu peux te retrouver dans des situations de merde mais grâce notament au <code>git reflog</code> qui traque toutes les commandes <code>git</code> (genre pull, commit, ...)
+      <li>Tant que tu ne fous pas la merde dans le dossier .git/ (bien sur, si tu supprime des fichiers non traqués par git, c'est fini pour eux) tu n'arrivera probablement pas à casser ton repository. Tu peux te retrouver dans des situations de merde mais grâce notament au <code>git reflog</code> qui traque les commandes <code>git</code> du genre commit, checkout, ...</li>
     </ul>
 
 
-      Liens externe:<br/>
-      https://learngitbranching.js.org
+    <h3>Les branches</h3>
+    L'intérêt des branches, c'est par exemple d'avoir toujours un endroit où tu sais que ton code fonctionne, que tu peux utiliser comme réference.<br/>
+    À l'inverse, si tu veux implementer une nouvelle feature, t'es souvent assez sûr que tu vas casser un truc, que ton code va se retrouver avec un bout de feature mais pas terminée, bref dans un état pas forcément super clean. De plus, tu peux en venir à la conclusion que cette feature en question, t'en veux plus.<br/>
+    Tu te retrouvera aussi assez souvent dans la situation où t'aimerai bien vérifier le comportement de ta dernière version stable et, essayer de trouver le commit correspondant est assez sub-optimal (comprendre: "un peu à chier").<br/>
+    Par défaut, quand tu crée un répo, tu te retrouve, de manière transparente, sur une branche par défaut (appelée "master" depuis les années 90 mais c'est gentillement en train de transitionner sur "main"; c'est de plus configurable si t'aime pas les deux noms).<br/>
 
 
-      <h2>Changer un commit</h2>
-      Deux cas de figure:<br/>
-      <ul>
-        <li>Le commit n'est pas pushé: tout va bien.</li>
-        <li>Le commit est déjà pushé sur un serveur -> dans ~100% des cas: bah domage.</li>
-      </ul>
-
-      <h3>Commit non pushé</h3>
-      Éditer seulement le message du dernier commit: <code>git commit --amend</code><br/>
-      Éditer le dernier commit (modifier des fichier commités, fichier oublié, ...)<code>git reset HEAD~1</code><br/>
 
 
-      <h3>Commit pushé</h3>
-      Pour éditer un commit déjà pushé, la vraie bonne réponse c'est "le fait pas" (et je déconne pas, si par exemple ton message de commit c'est ton mot de passe, bah change de mot de passe, déso).<br/>
+    <h2>Changer un commit</h2>
+    Deux cas de figure:<br/>
+    <ul>
+      <li>Le commit n'est pas pushé: tout va bien.</li>
+      <li>Le commit est déjà pushé sur un serveur -> dans ~100% des cas: bah domage.</li>
+    </ul>
 
-      Si ton commit fait de la merde sur ta branche stable, l'<em>ideal</em> c'est de génerer un commit qui est exactement l'inverse du commit qui fait de la merde -> <code>git revert hash_du_commit_qui_fait_de_la_merde</code><br/>
-
-      Pourquoi c'est autant le bordel pour juste vouloir éditer un commit, on s'en fout qu'il soit déja pushé! En fait dans le cas où le commit est déjà pushé, on parle de ré-écrire l'historique.
-      Le problème c'est que t'as <em>aucun</em> moyen de savoir si quelqu'un a mis à jour sa version de ton repo entre le moment où t'as push ton commit et le moment où tu ré-écris l'historique.
-      En gros, tu dis à ceux qui ont pull (mis à jour) au mauvais moment: "Bah va bien te faire foutre", et ils se retrouvent juste dans la merde sans même le savoir jusqu'à leur prochain push ou pull.<br/>
-      Si t'as compris pourquoi il ne faut pas le faire, voici comment quand même le faire: <code>git reset --hard HEAD~1</code>
+    <h3>Commit non pushé</h3>
+    Éditer seulement le message du dernier commit: <code>git commit --amend</code><br/>
+    Éditer le dernier commit (modifier des fichier commités, fichier oublié, ...)<code>git reset HEAD~1</code><br/>
 
 
-      D'après le <code>man git reset</code><br/>
-      <pre>
+    <h3>Commit pushé</h3>
+    Pour éditer un commit déjà pushé, la vraie bonne réponse c'est "le fait pas" (et je déconne pas, si par exemple ton message de commit c'est ton mot de passe, bah change de mot de passe, déso).<br/>
+
+    Si ton commit fait de la merde sur ta branche stable, l'<em>ideal</em> c'est de génerer un commit qui est exactement l'inverse du commit qui fait de la merde -> <code>git revert hash_du_commit_qui_fait_de_la_merde</code><br/>
+
+    Pourquoi c'est autant le bordel pour juste vouloir éditer un commit, on s'en fout qu'il soit déja pushé! En fait dans le cas où le commit est déjà pushé, on parle de ré-écrire l'historique.
+    Le problème c'est que t'as <em>aucun</em> moyen de savoir si quelqu'un a mis à jour sa version de ton repo entre le moment où t'as push ton commit et le moment où tu ré-écris l'historique.
+    En gros, tu dis à ceux qui ont pull (mis à jour) au mauvais moment: "Bah va bien te faire foutre", et ils se retrouvent juste dans la merde sans même le savoir jusqu'à leur prochain push ou pull.<br/>
+    Si t'as compris pourquoi il ne faut pas le faire, voici comment quand même le faire: <code>git reset --hard HEAD~1</code>
+
+
+    D'après le <code>man git reset</code><br/>
+    <pre>
         Undo commits permanently
 
-               $ git commit ...
-               $ git reset --hard HEAD~3   (1)
+        $ git commit ...
+        $ git reset --hard HEAD~3   (1)
 
-           1. The last three commits (HEAD, HEAD^, and HEAD~2) were bad and you do not want to ever
-           see them again. Do not do this if you have already given these commits to somebody else.
-           (See the "RECOVERING FROM UPSTREAM REBASE" section in git-rebase(1) for the implications of doing so.)
-</pre>
+        1. The last three commits (HEAD, HEAD^, and HEAD~2) were bad and you do not want to ever
+        see them again. Do not do this if you have already given these commits to somebody else.
+        (See the "RECOVERING FROM UPSTREAM REBASE" section in git-rebase(1) for the implications of doing so.)
+    </pre>
 
 
-D'après le <code>man git rebase</code>
-<pre>
-RECOVERING FROM UPSTREAM REBASE
-       Rebasing (or any other form of rewriting) a branch that others have based work on is a bad
-       idea: anyone downstream of it is forced to manually fix their history. This section explains
-       how to do the fix from the downstream’s point of view. The real fix, however, would be to
-       avoid rebasing the upstream in the first place.
-</pre>
+    D'après le <code>man git rebase</code> (sert en très gros à faire un stash + pull + stash pop)
+    <pre>
+      RECOVERING FROM UPSTREAM REBASE
+      Rebasing (or any other form of rewriting) a branch that others have based work on is a bad
+      idea: anyone downstream of it is forced to manually fix their history. This section explains
+      how to do the fix from the downstream’s point of view. The real fix, however, would be to
+      avoid rebasing the upstream in the first place.
+    </pre>
+
+
+
+    <h1>Liens utiles</h1>
+    <p>
+      <a href="https://learngitbranching.js.org">Résoudre des puzzles Git avec interface graphique</a><br/>
+      Si t'as lu jusqu'ici plusieurs fois, que t'as encore des aspirines et, surtout utilisé Git au moins un minimum, la <href="TODO">page hard-core consacrée à git se trouve ici</a><br/>
+    </p>
 
 
   </body>
