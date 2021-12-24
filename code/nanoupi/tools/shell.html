@@ -7,8 +7,65 @@
   <body>
     <h1>Introduction</h1>
     Un Terminal (par exemple: X<emph>term</emph>, <emph>term</emph>inator) est un programme qui permet de faire tourner un invite de commande en faisant pas grand chose de plus qu'afficher du texte proprement.<br/>
-    L'invite de commande est la partie qui nous intéresse ici. <br/>
-    Le parallèle Windows serait cmd / dos
+    L'invite de commande (le shell) est la partie qui nous intéresse ici.<br/>
+    Le parallèle Windows serait cmd / dos<br/>
+    <emph>sh</emph> est le shell historique sous Unix. Il date des années 70, pose des bases solides, fonctionne sous les Systèmes Unix-like dont font partie par exemple les distributions Linux, Mac-OS, *-BSD, ... Donc si t'as un truc compatible sh c'est compatible avec tout sauf Windows.<br/>
+
+
+
+
+    <h1>Se balader</h1>
+    2 outils: <code>cd</code> Change Directory (changer de répertoire) et <code>ls</code> (LiSt).<br/>
+
+    Exemples:
+    <ul>
+      <li>Voir ce qu'il y a dans le dossier courrant: <code>ls</code></li>
+      <li>Aller dans le dossier "Documents/": <code>cd Documents</code></li>
+      <li>Voir ce qu'il y a dans le dossier "Downloads/" sans y aller pour autant: <code>ls Downloads/</code></li>
+      <li>Retourner chez soi: <code>cd</code> (sans argument)</li>
+    </ul>
+
+
+    Notes:
+    <li>.. désigne le dossier parrent du dossier actuel. Ainsi <code>cd ../..</code> t'amène au parent du parent du dossier courrant</li>
+    <li>/ désigne la racine de l'arborescence, le dossier qui n'a pas de parent. Exemple <code>ls /</code> et <code>ls /..</code> font exactement la même chose: liste le contenu de la racine</li>
+    <li>Les chemins contiennent des '/' (forward slash) pour séparer les dossiers. Pas de backslash à la Windows</li>
+    <li>~ désigne ton chez toi (/home/mon_login/). Par conséquent <code>cd</code> ou <code>cd ~/</code> font éxactement la même chose.</li>
+    <li>Linux est sensible à la casse. "Documents" "documents" et "docuMenTS" désignent 3 fichiers et ou dossiers différents.</li>
+    <li>Le dernier slash d'un chemin qui se termine par un dossier peut être omis. Exemple <code>cd ~/Documents/</code> et <code>cd ~/Documents</code> font la même chose.<br/>
+      Il n'est pas possible de créer au même endroit un dossier et un fichier qui ont le même nom donc on peut pas se gourrer.<br/>
+      Même si j'éssaye ici d'être consistent, de temps en temps je me trompe mais j'essaye toujours de noter les dossier avec un '/' à la fin.</br/>
+    <li>
+      Il n'y a pas de lettre magique à la C:\ Windows. La racine n'a pas de parents et est unique. Si tu veux sauvegarder tous tes documents intéresse toi à /home c'est là que tu habites, éventuellement à /etc car là se trouvent les fichiers de configuration des programmes et /root c'est là qu'habite root, l'administrateur.<br/>
+      On s'en fout complet de savoir si / est sur un SSD, /etc sur une partition à part /media/usb/ sur une carte SD /home sur un disque dur séparé et /home/windows sur un Serveur-Windows.
+    </li>
+
+
+    <h1>L'auto-complétion</h1>
+    Une des feature les plus utilisées. Invoquer l'auto-complétion se fait à l'aide de la touche tabulation (double flêche vers la gauche de ton clavier?).<br/>
+    Concrètement, ça fait chier tout le monde de taper du texte dans un terminal. Si tu commence à taper <code>cd /<code> puis appuie sur tab deux fois consécutives, t'invoque l'auto-completion avec tous les chemins qui commencent par "/m" (probablement /mnt et /media) du coup avec une lettre en plus (<code>cd /mn</code> ou <code>cd /me</code>) appuyer sur tab (une seule fois cette fois car il n'y a plus d'ambiguité) va t'afficher cd /mnt ou cd /media comme si tu l'avait manuellement tapé. T'as plus qu'à appuyer sur entrée.<br/>
+        Là où ça devient vraiment cool, c'est que ça ne fonctionne pas que pour les chemins mais aussi pour les commandes et même, dans la pluspart des cas, leurs arguments.<br/>
+        En gros si tu sais plus exactement comment s'appelle un truc, ce qui peut t'aider: <kbd>tab</kbd> <code>apropos mot_clé</code> <code>man commande</code>
+
+
+
+   <h1>Aliases</h1>
+   Par défaut, <code>ls</code> ls affiche les noms de fichiers ou dossiers sur la même ligne. C'est bien, mais quand il y en a beaucoup et que tu cherches quelque-chose alphabêtiquement, un résultat par ligne c'est souvent beaucoup plus clair.
+   Pour ça, on peut taper <code>ls -l</code> (-l pour "long list"). Tant qu'on y est, avoir les tailles des fichiers affichées par ls -l pas en bytes mais en "human readable", ça aide aussi: (212275200 Vs 203M pour éviter de compter les chiffres<br/>
+
+   <h1>Regexp et globing</h1>
+
+
+
+   <h1>Tricks / readline</h1>
+   Souvent, dans un terminal pour copier du texte, ça ne fonctionne pas avec Ctrl-C / Ctrl-V mais avec rien (juste sélectionner le texte avec la souris) pour copier, et Ctrl-Shift-V ou click-souris-molette pour coller.<br/>
+
+   Le readline est la partie du shell qui t'aide dans l'interface: c'est elle qui s'occupe des alias par exemple mais elle fait plus que ça.<br/>
+   Cette partie est vraiment spécifique à ton shell et n'est pas sh-compatible. Dans ce cas précis on s'en fout vraiment: être sh-compatible c'est bien quand t'appuie sur entrée mais avant bah... osef.<br/>
+   Par défaut sous bash, que t'utilise probablement, elle est configurée en mode Emacs donc faut aimer appuyer sur Control. Par conséquent, Ctrl-K coupe le texte à droite du curseur, Ctrl-U coupe tout à gauche (vraiment utile quand tu te gouatre en tappant un mot de passe et que tu veux juste recommencer).<br/>
+   Encore un truc cool: Alt-t échange le mot à droite avec celui à gauche du curseur.<br/>
+   Lister tous les tricks ici serai pas top, car le readline a sa page de manuel dédiée (<code>man readline</code>) qui liste tout.<br/>
+
 
 
     <div id="toc_container">
@@ -37,16 +94,7 @@
     </div>
 
 
-    <h3>man</h3>
-    <p>
-      Peut-être la command la plus utile sous Linux.<br/>
-      Oui ça fait vieux con de dire "lis la documentation (Read The Fucking Manual -> RTFM en anglais)". Mais c'est généralement LA source la plus actuelle et celle le moins sucéptible de dire de la merde.<br/>
-      Ces page de manuels sont souvent écrites et maintenues par les dévelopeurs des programmes en question et, souvent modifiées par des gens qui trouvent que quand quelque-chose n'est pas clair modifient ou demandent aux developeurs de modifier ces pages.<br/>
-    </p>
 
-
-  En règle plus générale, <emph>quelle que soit la commande</emph>; d'où qu'elle proviennent; c'est vraiment une <emph>TRÈS</emph> bonne idée de chercher dans la doc de la commande en question pour apprendre un truc au passage. Si j'écris "et là on fait un ls -1t", cool c'est <code>ls</code> on peut rien casser. Oui mais d'après le <code>man ls</code> "-1     list one file per line." et "-t     sort by time, newest first". Voila qui peut être pratique.<br/>
-    Quand, par exemple, dans un long script tu tombe sur <code>du</code>, les premières lignes de la description suffisent très souvent. Pour <code>du</code> "Summarize disk usage...". Ok, ça parle de place sur le disque; Pas forcément besoin tout de suite de checker toutes les options possibles ou utilisés dans le script en question.
 
 
   </body>
