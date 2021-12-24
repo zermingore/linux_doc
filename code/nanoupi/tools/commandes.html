@@ -1,0 +1,33 @@
+    <h3>man</h3>
+    <p>
+      Peut-être la command la plus utile sous Linux.<br/>
+      Oui ça fait vieux con de dire "lis la documentation (Read The Fucking Manual -> RTFM en anglais)". Mais c'est généralement LA source la plus actuelle et celle le moins sucéptible de dire de la merde.<br/>
+      De plus, ce manuel est installé par défaut sur ton système et presque chaque programme installé vient avec ses pages de manuel.<br/>
+      Ces page de manuels sont souvent écrites et maintenues par les dévelopeurs des programmes en question et, souvent modifiées par des gens qui trouvent que quand quelque-chose n'est pas clair modifient ou demandent aux developeurs de modifier ces pages.<br/>
+    </p>
+
+
+    En règle plus générale, <emph>quelle que soit la commande</emph>; d'où qu'elle proviennent; c'est vraiment une <emph>TRÈS</emph> bonne idée de chercher dans la doc de la commande en question pour apprendre un truc au passage. Si j'écris "et là on fait un ls -1t", cool c'est <code>ls</code> on peut rien casser. Oui mais d'après le <code>man ls</code> "-1     list one file per line." et "-t     sort by time, newest first". Voila qui peut être pratique.<br/>
+    Quand, par exemple, dans un long script tu tombe sur <code>du</code>, les premières lignes de la description suffisent très souvent. Pour <code>du</code> "Summarize disk usage...". Ok, ça parle de place sur le disque; Pas forcément besoin tout de suite de checker toutes les options possibles ou utilisés dans le script en question.
+
+
+
+    <h3>grep</h3>
+
+
+    <h3>Packages manager (gestionaire de programmes)</h3>
+    Un gestionnaire de paquets utilise une base de données de programme installable. Tu peux voir ça exactement comme un store sur téléphone.<br/>
+    Tu peux installer un tas de programme sans devoir te battre à essayer de trouver le site officiel, vérifier que le binaire est compatible avec ton architécture, etc.. Ces problèmes sont gérés par le gestionaire de paquets.<br/>
+    Sous les systèmes basés sur Debian (le cas de ce qui tourne sur ta Pi), ce gestionaire s'appelle <code>apt</code> (pour Advanced Package Tool).<br/>
+    Concrètement, si tu cherches un programme, <code>apt search mot_cle</code> (par exemple <code>apt search raspberry</code> si tu cherche un truc qui a un lien avec une Raspberry)<br/>
+    Si tu veux installer quelque-chose: <code>apt install nom_programme</code> (par exemple <code>apt install git</code>)<br/>
+    Note: ton gestionaire de paquets fait mumuse avec ton système (par exemple, copie des fichiers dans /usr/bin/). C'est pourquoi installer quelque nécessite d'être root (administrateur, utiliser <code>sudo</code>).<br/>
+
+
+
+
+    <h3>mount (utiliser une clé USB)</h3>
+    C:\
+
+
+    <h3>dmesg (lire les message du kernel)</h3>

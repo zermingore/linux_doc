@@ -1,0 +1,11 @@
+   <h1>Regexp et globing</h1>
+   Les expréssions rationnelles sont une manière de dire "tout ce qui commence par la lettre B" ou n'importe quoi qui contient la chaine de caractère "lol".<br/>
+   Malheuresement, il éxiste plusieurs standards de syntaxe. En règle générale, les règles suivantes existent toujours, au pire il faut se battre avec une syntaxe spécifique:
+   <ul>
+     <li>* n'importe quoi. a*b: match tout ce qui commence par a et fini par b. Par exemple: ab aCCC12879b</li>
+     <li>[a-z] une lettre minuscule</li>
+     <li>[0-9] un chiffre</li>
+     <li>[A-Za-z0-9] des lettres minuscule ou majuscules ou des chiffres</li>
+   </ul>
+   Exemple: trouver tous les fichiers .log <code>ls *.log</code><br/>
+   Exemple: trouver tous les fichiers se terminant .c ou .h avec <code>find</code> <code>find . -name \*.c -o -name \*.h</code>

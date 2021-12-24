@@ -12,6 +12,30 @@
     <emph>sh</emph> est le shell historique sous Unix. Il date des années 70, pose des bases solides, fonctionne sous les Systèmes Unix-like dont font partie par exemple les distributions Linux, Mac-OS, *-BSD, ... Donc si t'as un truc compatible sh c'est compatible avec tout sauf Windows.<br/>
 
 
+    <div id="toc_container">
+      <p id="toc_title">Contenu</p>
+      <ul id="toc_list">
+        <li>
+          <a href="#Commandes">Commandes</a>
+        </li>
+
+        <li>
+          <a href="#editeur">Editeur</a>
+          <ul>
+            <li><a href="#emacs">Emacs</a></li>
+            <li><a href="#vim">Vim</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#ssh">SSH</a>
+        </li>
+
+        <li>
+          <a href="#git">Git</a>
+        </li>
+      </ul>
+    </div>
 
 
     <h1>Se balader</h1>
@@ -51,9 +75,57 @@
 
    <h1>Aliases</h1>
    Par défaut, <code>ls</code> ls affiche les noms de fichiers ou dossiers sur la même ligne. C'est bien, mais quand il y en a beaucoup et que tu cherches quelque-chose alphabêtiquement, un résultat par ligne c'est souvent beaucoup plus clair.
-   Pour ça, on peut taper <code>ls -l</code> (-l pour "long list"). Tant qu'on y est, avoir les tailles des fichiers affichées par ls -l pas en bytes mais en "human readable", ça aide aussi: (212275200 Vs 203M pour éviter de compter les chiffres<br/>
+   Pour ça, on peut taper <code>ls -l</code> (-l pour "long list"). Tant qu'on y est, avoir les tailles des fichiers affichées par ls -l pas en bytes mais en "human readable", ça aide aussi: (212275200 Vs 203M pour éviter de compter les chiffres.<br/>
+   Du coup on se retrouve <emph>très</emph> souvent à taper <code>ls -lh</code> ce qui est, chiant. On peut aliaser ça sur par exemple <code>ll</code> ou <code>plop</code> (je recommanderai peut-être plutôt le premier, mais le 2e ou même les deux sont parfaitement vailides). L'intérêt c'est que, plutôt que de taper <code>ls -lh</code> on peut juste taper <code>ll</code>.<br/>
+   Pour créer un alias: <code>alias ll='ls -lh'</code><br/>
+   Pour le faire de manière permanente, ajouter dans le fichier ~/.bashrc la ligne précédente plutôt que de la taper: <code>alias ll='ls -lh'</code><br/>
 
-   <h1>Regexp et globing</h1>
+
+
+   <h1>Fichiers</h1>
+
+   <h2>Copier des trucs / créer des répertoires</h2>
+   <code>mkdir</code> permet de créer un répertoire. <code>mkdir -p nouveau/dossier/avec/des/parents/qui/n_existent/pas/encore</code> pour créer une arborescence complète.
+
+
+   <h2>Déplacer / supprimer des fichiers</h2>
+   Attention: par défaut, mv (move) et rm (remove) ne te demandent pas de confirmation pour écraser / supprimer un fichier. Il n'y a pas de corbeille sous Linux donc faut faire gaffe (<emph>et</emph> éventuellement utiliser le flag "-i" (interactive) valide pour les deux commandes, qui demanderont confirmation.<br/>
+   Renommer un fichier: <code>mv fichier_ou_repertoire nouveau_nom</code><br/>
+   Déplacer un fichier: <code>mv fichier_ou_repertoire nouveau/chemin/</code><br/>
+
+   Supprimer un fichier: <code>rm fichier</code><br/>
+   Supprimer un dossier vide (commande safe) <code>rmdir dossier_vide</code><br/>
+   Supprimer un dossier et son contenu: <code>rm -r dossier_a_virer</code><br/>
+
+   J'insiste encore une fois: faire gaffe c'est mieux avant (officiellement c'est "think before you type").<br/>
+   Récupere des fichiers est faisable mais loin d'être trivial. Certains tools existent mais agissent vraiment niveau driver disque dur en gros en mode "hey, où est-ce que t'as de la place libre? je voudrai regarder si ça a pas été des fichiers ce gros tas de merdier").<br/>
+   Plus en bonus: installer ce genre de Tool... génère des accès disque en écriture succéptibles d'écrire sur ton beau fichier que tu voulais récupérer.<br/>
+
+
+   <h2>Manipulation de fichiers</h2>
+   Vu que sous Linux <emph>tout</emph> est fichier (dossiers, RAM, GPIOs, écran, ...), savoir lire / écrire des fichiers sans trop galérer est primordial.<br/>
+   La façon la plus simple d'afficher des fichier est avec <code>cat</code> (conCATenate). Cette commande va afficher le contenu des fichiers sur la sortie standard (directement dans ton terminal).<br/>
+   Exemple: <code>cat /proc/cmdline</code><br/>
+   Éventuellement, tu peux jeter un coup d'oeil à <code>less</code> permettant d'afficher un fichier dans un truc qui ressemble à un éditeur.<br/>
+
+
+   <h2>Redirections</h2>
+   Les redirections peuvent être utilisées pour lire / éditer un fichier.<br/>
+   <code>echo</code> est utilisé pour afficher du texte: <code>echo "Hello world!"</code> affiche "Hello world!" Cool.<br/>
+   Par contre, on peut vouloir utiliser echo et rediriger sa sortie dans un fichier:<br/>
+   <code>echo "Hello world!" >> test</code> La chaine de caractères "Hello world!" suivie d'un saut de ligne sera ajoutée au fichier "test".<br/>
+   À la place de ">>" on aurait pu utiliser ">" pour remplacer le contenu du fichier avec "Hello world!".<br/>
+
+
+   <h2>Éditer un fichier interactivement</h2>
+   Pour éditer un fichier, là par contre c'est la galère. Oui, ça marcherai d'utiliser un truc graphique mais je recommande très chaudement d'utiliser emacs ou vim (car plus tard, t'aura pas forcément envie de brancher clavier / souris / écran sur tous tes appareils).<br/>
+
+
+
+   <h1>Signals</h1>
+   Je ne vais pas entrer ici dans le détails mais les programmes peuvent communiquer entre eux et avec le système à l'aide de signaux.<br/>
+   Si tu veux arrêter un programme, tu peux lui envoyer un de ces signaux.<br/>
+   C'est exactement ce que fait ton shell si tu tapes Ctrl-C: il va gentillement tuer (oui, la terminologie exacte est "kill") le processus en train de tourner. C'est particulièrement utile si tu fais, par exemple un <code>cat</code> d'un gros fichier qui te vomit dessus ou si tu fais un <code>sleep 10</code> où le programme attend pendant N secondes.<br/>
 
 
 
@@ -64,35 +136,8 @@
    Cette partie est vraiment spécifique à ton shell et n'est pas sh-compatible. Dans ce cas précis on s'en fout vraiment: être sh-compatible c'est bien quand t'appuie sur entrée mais avant bah... osef.<br/>
    Par défaut sous bash, que t'utilise probablement, elle est configurée en mode Emacs donc faut aimer appuyer sur Control. Par conséquent, Ctrl-K coupe le texte à droite du curseur, Ctrl-U coupe tout à gauche (vraiment utile quand tu te gouatre en tappant un mot de passe et que tu veux juste recommencer).<br/>
    Encore un truc cool: Alt-t échange le mot à droite avec celui à gauche du curseur.<br/>
-   Lister tous les tricks ici serai pas top, car le readline a sa page de manuel dédiée (<code>man readline</code>) qui liste tout.<br/>
-
-
-
-    <div id="toc_container">
-      <p id="toc_title">Contenu</p>
-      <ul id="toc_list">
-        <li>
-          <a href="#Commandes">Commandes</a>
-        </li>
-
-        <li>
-          <a href="#editeur">Editeur</a>
-          <ul>
-            <li><a href="#emacs">Emacs</a></li>
-            <li><a href="#vim">Vim</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="#ssh">SSH</a>
-        </li>
-
-        <li>
-          <a href="#git">Git</a>
-        </li>
-      </ul>
-    </div>
-
+   Je ne vais pas lister tous les tricks ici; le readline a sa page de manuel dédiée (<code>man readline</code>) qui le fait.<br/>
+   À noter que le readline est configurable (par exemple pour rendre l'auto-complétion insensible à la casse).
 
 
 

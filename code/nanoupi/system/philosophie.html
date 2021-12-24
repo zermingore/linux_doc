@@ -2,6 +2,25 @@ Philosophie Unix (le truc sur lequel sont basés, entre autres Linux et Mac OS)
 - Des commandes simples que tu peux combiner pour faire des trucs kikoo
 Dit comme ça ça t'aide surement pas à t'y retrouver mais des exemples peuvent aider:
 
+Trouver dans un dossier à quel endroit part le plus de place:
+
+On va utiliser les commandes suivantes:
+
+du ("disk usage") permet d'afficher l'espace disque bouffé par des fichiers ou répertoires
+<code>du -h .</code> # on utilise le -h ("human") flag pour avoir quelque chose de lisible (converti en kilo-mega-giga-... bytes plutôt que d'afficher la valeur brute en bytes).
+
+<code>sort</code> permet d'ordonner des valeurs
+<code>sort -h</code> # encore un exemple de "human" flag. Par défaut sort trie de manière lexicographique (genre "10 GB" apparaitra avant "10 MB" car M apparait avant G dans le dictionaire).
+
+<code>tail -n 5</code> # on va juste garder les 5 dernières entrées listées. Vu qu'elles sont triées, ce sont les plus grosses.
+
+
+Le but du jeu ça va être de connecter la sortie d'une commande avec l'entrée de la suivante.<br/>
+Pour ce faire, on va utiliser le "|" ("pipe" en anglais, prononcé "paillepe"). Concrètement ça s'écrit comme ça:
+<code>du -h . | sort -h | tail -n 5</code><br/>
+Et... c'est tout.
+
+Note: vu que <code>du</code> est récurssif (déscend dans le dossiers fils), éxecuter cette commande à la racine peut prendre beaucoup de temps et ce sans rien afficher à part des messages d'erreur, ce qui peut être déroutant.<br/>
 
 
 Cela dit, pas toutes les commandes sont triviales:
