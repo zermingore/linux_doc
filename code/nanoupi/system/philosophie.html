@@ -26,8 +26,8 @@ Note: vu que <code>du</code> est récurssif (déscend dans le dossiers fils), é
 Cela dit, pas toutes les commandes sont triviales:
 `find` pour trouver un fichier par exemple a un paquet d'options, une en particulière permettant d'executer quelque-chose pour chaque fichier
 
-ex: chercher 'lol' dans tous les fichier du dossier courrant s'appelant nanou_quelquechose
-$> find . -iname nanou_\* -exec grep -H lol {} \;
+ex: chercher 'lol' dans tous les fichier du dossier courrant s'appelant test_quelquechose
+$> find . -iname test_\* -exec grep -H lol {} \;
 et ouais, ça suit pas trop le schema cmd1 | cmd2 | cmd3 | ...
 
 
