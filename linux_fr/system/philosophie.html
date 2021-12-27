@@ -7,82 +7,85 @@
 
   <body>
 
-    Philosophie Unix (le truc sur lequel sont basés, entre autres Linux et Mac OS)
-- Des commandes simples que tu peux combiner pour faire des trucs kikoo
-Dit comme ça ça t'aide surement pas à t'y retrouver mais des exemples peuvent aider:
+    <h1>Introduction</h1>
+    Philosophie Unix (le truc sur lequel sont basés, entre autres Linux et Mac OS)<br/>
 
-Trouver dans un dossier à quel endroit part le plus de place:
+    <h2>Des commandes simples que tu peux combiner pour faire des trucs kikoo</h2>
+    Dit comme ça ça t'aide surement pas à t'y retrouver mais des exemples peuvent aider:<br/>
 
-On va utiliser les commandes suivantes:
+    Trouver dans un dossier à quel endroit part le plus de place:<br/>
 
-du ("disk usage") permet d'afficher l'espace disque bouffé par des fichiers ou répertoires
-<code>du -h .</code> # on utilise le -h ("human") flag pour avoir quelque chose de lisible (converti en kilo-mega-giga-... bytes plutôt que d'afficher la valeur brute en bytes).
+    On va utiliser les commandes suivantes:<br/>
 
-<code>sort</code> permet d'ordonner des valeurs
-<code>sort -h</code> # encore un exemple de "human" flag. Par défaut sort trie de manière lexicographique (genre "10 GB" apparaitra avant "10 MB" car M apparait avant G dans le dictionaire).
+    du ("disk usage") permet d'afficher l'espace disque bouffé par des fichiers ou répertoires<br/>
+    <code>du -h .</code> # on utilise le -h ("human") flag pour avoir quelque chose de lisible (converti en kilo-mega-giga-... bytes plutôt que d'afficher la valeur brute en bytes).<br/>
 
-<code>tail -n 5</code> # on va juste garder les 5 dernières entrées listées. Vu qu'elles sont triées, ce sont les plus grosses.
+    <code>sort</code> permet d'ordonner des valeurs<br/>
+    <code>sort -h</code> # encore un exemple de "human" flag. Par défaut sort trie de manière lexicographique (genre "10 GB" apparaitra avant "10 MB" car M apparait avant G dans le dictionaire).<br/>
 
-
-Le but du jeu ça va être de connecter la sortie d'une commande avec l'entrée de la suivante.<br/>
-Pour ce faire, on va utiliser le "|" ("pipe" en anglais, prononcé "paillepe"). Concrètement ça s'écrit comme ça:
-<code>du -h . | sort -h | tail -n 5</code><br/>
-Et... c'est tout.
-
-Note: vu que <code>du</code> est récurssif (déscend dans le dossiers fils), éxecuter cette commande à la racine peut prendre beaucoup de temps et ce sans rien afficher à part des messages d'erreur, ce qui peut être déroutant.<br/>
+    <code>tail -n 5</code> # on va juste garder les 5 dernières entrées listées. Vu qu'elles sont triées, ce sont les plus grosses.<br/>
 
 
-Cela dit, pas toutes les commandes sont triviales:
-`find` pour trouver un fichier par exemple a un paquet d'options, une en particulière permettant d'executer quelque-chose pour chaque fichier
+    Le but du jeu ça va être de connecter la sortie d'une commande avec l'entrée de la suivante.<br/><br/>
+    Pour ce faire, on va utiliser le "|" ("pipe" en anglais, prononcé "paillepe"). Concrètement ça s'écrit comme ça:<br/>
+    <code>du -h . | sort -h | tail -n 5</code><br/><br/>
+    Et... c'est tout.<br/>
 
-ex: chercher 'lol' dans tous les fichier du dossier courrant s'appelant test_quelquechose
-$> find . -iname test_\* -exec grep -H lol {} \;
-et ouais, ça suit pas trop le schema cmd1 | cmd2 | cmd3 | ...
+    Note: vu que <code>du</code> est récurssif (déscend dans le dossiers fils), éxecuter cette commande à la racine peut prendre beaucoup de temps et ce sans rien afficher à part des messages d'erreur, ce qui peut être déroutant.<br/>
 
 
+    Cela dit, pas toutes les commandes sont triviales:<br/>
+    `find` pour trouver un fichier par exemple a un paquet d'options, une en particulière permettant d'executer quelque-chose pour chaque fichier<br/>
 
-`bash` Le truc qui tourne dans le terminal dans lequel tu tapes tes commandes et qui les interprete :/
-$> lol
-bash: lol: command not found
-^^^^ <- oui lui la
-
-Note:
-Il y a une multitude d'interpretteurs de commande (on parle de "shell").
-Les shells sérieux sont basés sur `sh` qui traine depuis les annés 70.
-Ca permet d'avoir des programmes relativement compatibles qu'importe le shell que tu / ton system choisit.
+    ex: chercher 'lol' dans tous les fichier du dossier courrant s'appelant test_quelquechose<br/>
+    $> find . -iname test_\* -exec grep -H lol {} \;<br/>
+    et ouais, ça suit pas trop le schema cmd1 | cmd2 | cmd3 | ...<br/>
 
 
 
-- TOUT est fichier
+    `bash` Le truc qui tourne dans le terminal dans lequel tu tapes tes commandes et qui les interprete :/<br/>
+    $> lol<br/>
+    bash: lol: command not found<br/>
+    ^^^^ - oui lui la<br/>
 
-un fichier est un fichier (sans déconner...)
-un dossier est un fichier (woot?)
-ton clavier est un fichier
-ta RAM est un fichier
-ton CPU est un fichier
-un programme en train de s'éxecuter est un fichier
-
-ok c'est bien mais c'est utile pour les développeurs du kernel, pas pour les utilisateurs comme nous de savoir ça ou bien?
-
-en fait non, c'est utile.
-écrire dans un fichier `echo blabla >> mon_fichier`
-afficher un fichier: `cat mon_fichier`
+    Note:<br/>
+    Il y a une multitude d'interpretteurs de commande (on parle de "shell").<br/>
+    Les shells sérieux sont basés sur `sh` qui traine depuis les annés 70.<br/>
+    Ca permet d'avoir des programmes relativement compatibles qu'importe le shell que tu / ton system choisit.<br/>
 
 
-donc, exemple concret, sur mon laptop:
-(attention, ça dépend du Hardwar; ici le controlleur en charge de ça est un intel d'où le intel_backlight)
 
-# Récupperer la valeur max du rétro-éclairage de l'écran
-cat /sys/class/backlight/intel_backlight/max_brightness
-852
+    <h1>TOUT est fichier</h1>
 
-# ok, on va le foutre à environ un quart
-echo 200 > /sys/class/backlight/intel_backlight/brightness
+    <ul>
+      <li>Un fichier est un fichier (sans déconner...)</li>
+      <li>Un dossier est un fichier (woot?)</li>
+      <li>Ton clavier est un fichier</li>
+      <li>Ta RAM est un fichier</li>
+      <li>Ton CPU est un fichier</li>
+      <li>Un programme en train de s'éxecuter est un fichier</li>
+    </ul>
+
+    Ok c'est bien mais c'est utile pour les développeurs du kernel, pas pour les utilisateurs comme nous de savoir ça ou bien?<br/>
+
+    en fait non, c'est utile.<br/>
+    écrire dans un fichier `echo blabla >> mon_fichier`<br/>
+    afficher un fichier: `cat mon_fichier`<br/>
 
 
-et c'est *vraiment* comme ça que je règle le rétro-éclairage sur mon laptop
-(concrètement, j'ai mappé des touches clavier pour lire la valeur courante et l'augmenter par pallier, mais ça marche *vraiment* comme ça)
+    donc, exemple concret, sur mon laptop:<br/>
+    (attention, ça dépend du Hardware; ici le controlleur en charge de ça est un intel d'où le intel_backlight)<br/>
 
+    # Récupperer la valeur max du rétro-éclairage de l'écran<br/>
+    cat /sys/class/backlight/intel_backlight/max_brightness<br/>
+    852<br/>
+
+    # ok, on va le foutre à environ un quart<br/>
+    echo 200 > /sys/class/backlight/intel_backlight/brightness<br/>
+
+
+    et c'est *vraiment* comme ça que je règle le rétro-éclairage sur mon laptop<br/>
+    (Concrètement, j'ai mappé des touches clavier pour lire la valeur courante et l'augmenter par pallier, mais ça marche *vraiment* comme ça)
 
   </body>
 </html>

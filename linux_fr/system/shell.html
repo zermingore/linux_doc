@@ -8,39 +8,40 @@
 
     <h1>Terminal Vs Shell</h1>
     Le terminal est la fenêtre graphiqe dans laquelle tu tapes du texte.<br/>
-    Le shell est le programme qui interprête le texte que t'as tapé au moment où tu t'appuie sur entrée.
+    Le shell est le programme qui interprête le texte que t'as tapé au moment où tu t'appuie sur entrée.<br/>
 
-    En gros: on s'en fout du Terminal, celui qui fait le boulot c'est le shell (qui est le programme qui tourne dans le terminal).
+    En gros: on s'en fout du Terminal, celui qui fait le boulot c'est le shell (qui est le programme qui tourne dans le terminal).<br/>
 
-    ### TODO shell (bash sh zsh...)
+    ### TODO shell (bash sh zsh...)<br/>
 
 
 
     <h1>Commandes Shell</h1>
     Quand j'écris "commande" un peu partout c'est un abus de language.<br/>
 
-    mis à part <emph>cd</emph> 99% des commandes que t'entre sont des programmes, des binaires que le shell va juste éxecuter pour toi. Pas plus.
+    mis à part <emph>cd</emph> 99% des commandes que t'entre sont des programmes, des binaires que le shell va juste éxecuter pour toi. Pas plus.<br/>
 
-    Exemple:
-    $> ls
+    Exemple:<br/>
+    $> ls<br/>
 
-    Ton shell va, en gros chercher à exécuter /usr/local/bin/ls -> pas trouvé puis /usr/bin/ls -> hey ça existe -> exécuté. Ce programme en gros demande à ton OS "hey gros, il y a quoi dans ce(s) répertoire(s)" puis affiche ce que l'OS lui a donné si il s'est pas fait envoyer chier.
+    Ton shell va, en gros chercher à exécuter /usr/local/bin/ls -> pas trouvé puis /usr/bin/ls -> hey ça existe -> exécuté.<br/>
+    Ce programme en gros demande à ton OS "hey gros, il y a quoi dans ce(s) répertoire(s)" puis affiche ce que l'OS lui a donné si il s'est pas fait envoyer chier.<br/>
 
-    ### Plus de détails sur comment est exécuté un programme (hard-core)
-    ### TODO advanced/binary_loader.html
+    ### Plus de détails sur comment est exécuté un programme (hard-core)<br/>
+    ### TODO advanced/binary_loader.html<br/>
 
 
-    ### TODO CSS DETAILS
-    Mais alors cd?
+    ### TODO CSS DETAILS<br/>
+    Mais alors cd?<br/>
     <emph>cd</emph> est une built-in.<br/>
-    Tu peux lister les built-ins avec la commande <emph>help</emph>
+    Tu peux lister les built-ins avec la commande <emph>help</emph><br/>
     Pas un programme qui trainerait dans, par exemple /usr/bin/cd<br/>
     Ton shell va en gros juste set une variable dont la valeur est l'argument que t'as filé à <emph>cd</emph><br/>
-    $> man bash
-    ...
-    PWD    The current working directory as set by the cd command.
-    ...
-    <emph>ls</emph> sans argument va être interprêté par le shell comme "ls $PWD" et donc ton shell va exécuter le programme `ls` avec $PWD comme argument
+    $> man bash<br/>
+    ...<br/>
+    PWD    The current working directory as set by the cd command.<br/>
+    ...<br/>
+    <emph>ls</emph> sans argument va être interprêté par le shell comme "ls $PWD" et donc ton shell va exécuter le programme `ls` avec $PWD comme argument<br/>
 
 
   </body>
