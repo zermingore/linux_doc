@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">                                                                                                                                                                                            <title>Git</title>
+  </head>
+
+  <body>
+    <h1>Introduction</h1>
+    <p>
+      Git is one of the most important tool to develop.<br/>
+      We all made some quick and dirty copy-paste of something (text file, source code, binary, ...)<br/>
+      Git is an open source versioning tool. It's its job to do the copy-pastes equivalents, without losing something. It's also its job to clearly show the differences between two versions. It can also help finding the last working version of something, ...<br/>
+      The advantage of Git is also its drawback: it was designed to keep track of the Linux kernel by Linus Torvalds its creator.<br/>
+
+      Let's take care of some questions which could pop in your mind:<br/>
+      <ul>
+        <li>"Why should I need such a war machine tool just to keep track of a few files?".<br/>
+          You're probably using something like a quad-core CPU with multiple Gigabytes of RAM to display an HTML web page.</li>
+        <li>"Won't it be too complicated to learn git (instead of another tool like SVN for instance)?".<br/>
+          Even if Git has endless advanced features which can <em>really</em> feel convoluted, the core features stay similar across versioning tools.<br/>
+          To sum up, Git killed everything, doing the stuff properly.</li>
+      </ul>
+      Summary: Unless you're stuck with proprietary versioning Tool preventing you from having a decent tool converting a Repo into a Git one, use Git.
+
+
+
+      Advantages:<br/>
+      <ul>
+        <li>Can fully work offline, even with an online server. You can access <em>everything</em> since the last time you checked the server state.</li>
+        <li>Ditributed: There is not necessarily <em>one</em> server. Some private Documents of mine are tracked accross multiple machines, in one Repository, in a fully transparent way.</li>
+        <li>Destroying / losing something is <em>possible</em> with Git. It's just hard.</li>
+        <li>The documentation is relatively complete and well organized (one <code>man</code> page per command).</li>
+        <li>If you have a rough idea how any versioning system works, it's enough to use Git.</li>
+      </ul>
+
+      Drawbacks:
+      <ul>
+        <li>It's a <em>huge</em> war machine, including a ton of feature you'll probably never use.</li>
+        <li>Loosing data is not easy but ending in obscure situations is relatively easy.</li>
+        <li>Some Graphic Interfaces for Git exist. Unfortunately, every single time I tried, it ended with a ragequit.</li>
+      </ul>
+
+      Fun fact: This website code is tracked in a git Repository (which lived only on my Laptop, was then mirrored on a server at home), to finaly migrate transparently here: <a href="github.com/zermingore/linux_doc">github.com/zermingore/linux_doc</a><br/>
+    </p>
+
+
+    <h1>TL; DR (Too Long; Don't read)</h1>
+    <p>
+      Initialization:
+      <ol>
+        <li>Having some cool files</li>
+        <li><code>git init path_to_my_cool_files__dot_for_instance</code> once, to create the git repository itself.</li>
+        <li><code>git add .</code> Track everything in this folder</li>
+        <li><code>git commit -m "This message *must* be as clear as possible as you'll read it in 6 months"</code> Create a snapshot</li>
+        <li><code>git push --set-upstream origin main</code> Publish the commit on a server</li>
+      </ol>
+
+    </p>
+
+    <p>
+      Standard workflow in a Git repository:
+      <ol>
+        <li>Modify / create some files</li>
+        <li><code>git add the_files_to_keep</code></li>
+        <li><code>git commit -m "*PLEASE* be explicit in your commit messages"</code></li>
+        <li><code>git push</code> (Assuming the server already know about your branch)</li>
+      </ol>
+    </p>
+
+
+
+    <p>
+      Example:
+      <ol>
+        <li><code>mkdir -p ~/projects/test/</code></li>
+        <li><code>cd ~/projects/test/</code></li>
+        <li><code>git init .</code></li>
+        <li><code>echo "This project is about testing Git" >> README</code></li>
+        <li><code>git add README</code></li>
+        <li><code>git commit -m "[Doc] README draft"</code></li>
+
+        <li><code>echo -e '#!/bin/sh\n\ngrep -m 1 "cpu cores" /proc/cpuinfo\n' >> nb_cores.sh</code></li>
+        <li><code>chmod +x nb_cores.sh</code></li>
+        <li><code>git add nb_cores.sh</code></li>
+        <li><code>git commit -m "[Tools] Added a tool to check the number of CPU cores"</code></li>
+      </ol>
+    </p>
+
+
+    <!--
+      <p>
+        <a href="TODO">Recorded Git sessions.</a><br>
+      </p>
+    -->
+
+  </body>
+</html>
