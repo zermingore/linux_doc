@@ -93,5 +93,24 @@
       </p>
     -->
 
+
+    <h1>Terminology</h1>
+    <h2>Repository</h2>
+    <p>
+      Repo for short, is the directory in which is the .git directory located (created by <code>git init</code> or <code>git clone</code>).<br/>
+      In this directory can one play around with <code>git</code><br/>
+    </p>
+
+
+    <h2>Commit</h2>
+    <p>
+      A commit in a Revision Control System may be seen as a snapshot; a copy-paste of the files which <code>git</code> knows about right now.<br/>
+      There is not a perfect moment to do a snapshot. Through experience, it's better too often (may be a little bit anoying) as too rarely (can be a real problem).<br/>
+      The is no minimal required changes to do a commit.<br/>
+      For instance, changing the network start timeout from 5 minutes to 1 minute is litteraly <em>one</em> character difference and if it's the only changes you made, related to the start-up of a board, then it perfectly fit a commit with a message like "[Boot] Decreased network waiting time" would be perfect.<br/>
+      It would be well better than making this timeout change and some other unrealted changes, which are not working, so let's forget about these changes and... why is this thing booting so slowly; why is the Networking job taking so long?<br/>
+    </p>
+
+
   </body>
 </html>
